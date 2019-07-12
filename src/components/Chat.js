@@ -28,9 +28,9 @@ export default class Chat extends React.Component {
         if (error) return <div>Error: {error.message}</div>;
         console.log(data);
         return (<div>
-                <Header/>
-                <MessageList/>
-                <MessageInput/>
+                {/* <Header/> */}
+                <MessageList data = { data }/>
+                {/* <MessageInput/> */}
             </div>
         );
     }
