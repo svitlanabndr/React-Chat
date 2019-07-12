@@ -7,7 +7,7 @@ export default class Chat extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: {}, isFetching: true, error: null };
+        this.state = { data: [], isFetching: true, error: null };
     }
 
     componentDidMount() {
@@ -20,6 +20,23 @@ export default class Chat extends React.Component {
             });
     }
 
+    sendMessage = (text) => {
+        return () => {
+            const newMessage = {
+                // id: "9333000183100",
+                // user: "Sveta",
+                avatar: "https://i.pravatar.cc/300?img=14",
+                created_at:  Date.now().toString(),
+                message: text,
+                // marked_read: false
+            };
+
+            const copyData = this.state.data;
+            copyData.push(newMessage);
+            this.setState({ data: copyData });
+        };
+    }
+
     render() {
         const { data, isFetching, error } = this.state;
 
@@ -30,7 +47,7 @@ export default class Chat extends React.Component {
         return (<div>
                 {/* <Header/> */}
                 <MessageList data = { data }/>
-                {/* <MessageInput/> */}
+                <MessageInput sendMessage = { this.sendMessage }/>
             </div>
         );
     }
