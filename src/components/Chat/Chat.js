@@ -36,6 +36,14 @@ export default class Chat extends React.Component {
             });
     }
 
+    makeHeaderProps = (data) => {
+
+        const usersAmount = data.reduce((set, next) => set.add(next.user), new Set()).size;
+        const messagesAmount = data.length;
+        const lastMessageTime = data[data.length - 1].created_at;
+        return { usersAmount, messagesAmount, lastMessageTime }
+    }
+
     makeMessageListProps = (data) => {
         let props = [];
         let previousDay;
@@ -160,7 +168,7 @@ export default class Chat extends React.Component {
 
         if (error) return <div>Error: {error.message}</div>;
         return (<div>
-                {/* <Header/> */}
+                <Header data = { this.makeHeaderProps(data) }/>
                 <MessageList data = { this.makeMessageListProps(data) } />
                 <MessageInput sendMessage = { this.sendMessage }/>
                 <EditModal isModalOpen={this.state.isModalOpen} closeModal={this.closeModal} >
