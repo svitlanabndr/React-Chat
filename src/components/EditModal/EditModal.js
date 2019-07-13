@@ -2,6 +2,10 @@ import React from 'react';
 import './EditModal.css';
 
 export default class Modal extends React.Component {
+	shouldComponentUpdate(nextProps) {
+        if(nextProps.isModalOpen ===  this.props.isModalOpen && nextProps.children === this.props.children) return false;
+        return true;
+    }
 	render() {
 		return (
 			<div className = 'modal-wrp'

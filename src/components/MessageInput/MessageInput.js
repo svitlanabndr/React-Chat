@@ -7,7 +7,12 @@ export default class MessageInput extends React.Component {
         super(props);
         this.state = {
             inputValue: ''
-          };
+        };
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if(nextState ===  this.state) return false;
+        return true;
     }
 
     updateInputValue = evt => {

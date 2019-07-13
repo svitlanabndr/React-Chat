@@ -9,6 +9,11 @@ export default class Message extends React.Component {
     openEdit = () => this.props.message.openModal(this.props.message.id);
     delete = () => this.props.message.deleteMessage(this.props.message.id);
     like = () => this.props.message.likeMessage(this.props.message.id);
+    
+    shouldComponentUpdate(nextProps) {
+        if(nextProps.message ===  this.props.message) return false;
+        return true;
+    }
 
     render() {
         const message = this.props.message;
