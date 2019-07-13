@@ -14,7 +14,6 @@ export default class OutgoingMessage extends React.Component {
     }
 
     render() {
-        console.log(this.props.message);
         const message = this.props.message;
         return (
             <div className="outgoing_msg">

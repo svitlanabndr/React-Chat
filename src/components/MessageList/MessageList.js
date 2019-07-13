@@ -10,7 +10,6 @@ export default class MessageList extends React.Component {
         return true;
     }
     render() {
-        console.log('message list rendered');
         const messageListItems = this.props.data.map((message) => {
             if (message.break_date) {
                 return <p className = 'break-line'>-------{ message.break_date }-------</p>
