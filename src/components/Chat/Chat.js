@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header.js';
-import MessageList from './MessageList.js';
-import MessageInput from './MessageInput.js';
-import EditModal from './EditModal.js';
+import Header from '../Header/Header.js';
+import MessageList from '../MessageList/MessageList.js';
+import MessageInput from '../MessageInput/MessageInput.js';
+import EditModal from '../EditModal/EditModal.js';
 import './Chat.css';
 
 export default class Chat extends React.Component {
