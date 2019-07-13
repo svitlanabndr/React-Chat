@@ -1,5 +1,6 @@
 import React from 'react';
-import Message from '../Message/Message.js';
+import OutgoingMessage from '../OutgoingMessage/OutgoingMessage.js';
+import IncomingMessage from '../IncomingMessage/IncomingMessage.js';
 import './MessageList.css';
 
 export default class MessageList extends React.Component {
@@ -13,7 +14,9 @@ export default class MessageList extends React.Component {
             if (message.break_date) {
                 return <p className = 'break-line'>-------{ message.break_date }-------</p>
             } else {
-                return <Message message = {message} />
+                return message.is_mine ? 
+                    <OutgoingMessage message = {message} /> : 
+                    <IncomingMessage message = {message} />
             }
         });
 

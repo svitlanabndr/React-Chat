@@ -1,37 +1,18 @@
 import React from 'react';
-import './Message.css';
+import './IncomingMessage.css';
 import { ReactComponent as UnlikeLogo } from './unlike.svg';
 import { ReactComponent as LikeLogo } from './like.svg';
-import { ReactComponent as EditLogo } from './edit.svg';
-import { ReactComponent as DeleteLogo } from './delete.svg';
 
 export default class Message extends React.Component {
-    openEdit = () => this.props.message.openModal(this.props.message.id);
-    delete = () => this.props.message.deleteMessage(this.props.message.id);
     like = () => this.props.message.likeMessage(this.props.message.id);
     
     shouldComponentUpdate(nextProps) {
-        if(
-            nextProps.message.message ===  this.props.message.message &&
-            nextProps.message.is_liked ===  this.props.message.is_liked
-            ) return false;
+        if(nextProps.message.is_liked ===  this.props.message.is_liked) return false;
         return true;
     }
 
     render() {
-        console.log('message rendered');
         const message = this.props.message;
-        if (message.is_mine) 
-            return (
-                <div className="outgoing_msg">
-                    <div className="sent_msg">
-                        <p>{ message.message }</p>
-                        <span className="time_date">{ message.created_at }</span> 
-                        <button type="button" className='delete-btn' onClick={this.delete}>< DeleteLogo /></button>      
-                        <button type="button" className='edit-btn' onClick={this.openEdit}>< EditLogo /></button>
-                    </div>
-                </div>
-            );
         const logo = message.is_liked ? <LikeLogo/> : <UnlikeLogo />;
 
         return (
