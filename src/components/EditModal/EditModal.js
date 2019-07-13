@@ -1,5 +1,6 @@
 import React from 'react';
 import './EditModal.css';
+import PropTypes from 'prop-types';
 
 export default class Modal extends React.Component {
 	shouldComponentUpdate(nextProps) {
@@ -9,7 +10,6 @@ export default class Modal extends React.Component {
         return true;
     }
 	render() {
-		console.log('modal rendered');
 		return (
 			<div className = 'modal-wrp'
 				style={{
@@ -23,3 +23,9 @@ export default class Modal extends React.Component {
 		);
 	}
 }
+
+Modal.propTypes = {
+	children: PropTypes.arrayOf(PropTypes.object),
+	closeModal: PropTypes.func,
+	isModalOpen: PropTypes.bool,
+};

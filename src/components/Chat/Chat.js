@@ -7,7 +7,6 @@ import './Chat.css';
 import logo from './logo.png'
 
 export default class Chat extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { 

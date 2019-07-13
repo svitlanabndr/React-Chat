@@ -2,8 +2,9 @@ import React from 'react';
 import './IncomingMessage.css';
 import { ReactComponent as UnlikeLogo } from './unlike.svg';
 import { ReactComponent as LikeLogo } from './like.svg';
+import PropTypes from 'prop-types';
 
-export default class Message extends React.Component {
+export default class IncomingMessage extends React.Component {
     like = () => this.props.message.likeMessage(this.props.message.id);
     
     shouldComponentUpdate(nextProps) {
@@ -31,3 +32,15 @@ export default class Message extends React.Component {
         );
     }
 }
+
+IncomingMessage.propTypes = {
+	message: PropTypes.shape({
+        id: PropTypes.string,
+        avatar: PropTypes.string,
+        created_at: PropTypes.string,
+        message: PropTypes.string,
+        is_liked: PropTypes.bool,
+        is_mine: PropTypes.bool,
+        likeMessage: PropTypes.func  
+    }),
+};

@@ -1,6 +1,7 @@
 import React from 'react';
 import './MessageInput.css';
 import { ReactComponent as LogoPlane } from './send.svg';
+import PropTypes from 'prop-types';
 
 export default class MessageInput extends React.Component {
     constructor(props) {
@@ -43,3 +44,7 @@ export default class MessageInput extends React.Component {
         );
     }
 }
+
+MessageInput.propTypes = {
+	sendMessage: PropTypes.func
+};

@@ -2,6 +2,7 @@ import React from 'react';
 import OutgoingMessage from '../OutgoingMessage/OutgoingMessage.js';
 import IncomingMessage from '../IncomingMessage/IncomingMessage.js';
 import './MessageList.css';
+import PropTypes from 'prop-types';
 
 export default class MessageList extends React.Component {
     shouldComponentUpdate(nextProps) {
@@ -27,3 +28,7 @@ export default class MessageList extends React.Component {
         );
     }
 }
+
+MessageList.propTypes = {
+	data: PropTypes.arrayOf(PropTypes.object)
+};

@@ -1,5 +1,6 @@
 import React from 'react';
-import './Header.css'
+import './Header.css';
+import PropTypes from 'prop-types';
 
 export default class Header extends React.Component {
     shouldComponentUpdate(nextProps) {
@@ -12,7 +13,6 @@ export default class Header extends React.Component {
     }
 
     render() {
-        console.log(this.props.data);
         return <div className = 'header'>
             <span className = 'title'>React Chat</span>
             <span className = 'participants'>{this.props.data.usersAmount} participants</span>
@@ -21,3 +21,11 @@ export default class Header extends React.Component {
         </div>
     }
 }
+
+Header.propTypes = {
+	data: PropTypes.shape({
+        usersAmount: PropTypes.number,
+        messagesAmount: PropTypes.number,
+        lastMessageTime: PropTypes.string
+    }),
+};
