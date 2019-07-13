@@ -10,23 +10,30 @@ export default class MessageInput extends React.Component {
           };
     }
 
-    updateInputValue = (evt) => {
+    updateInputValue = evt => {
         this.setState({
           inputValue: evt.target.value
         });
-      }
-    
-        
+    }
+
+    sendMessage = () => {
+        console.log(this.state.inputValue);
+        this.props.sendMessage(this.state.inputValue);
+        this.setState({
+            inputValue: ''
+          });
+    }
+   
     render() {
         return (
             <div className="type_msg">
                 <div className="input_msg_write">
-                <input type="text" className="write_msg" 
+                <input type="text"
                     value={this.state.inputValue} 
                     onChange={this.updateInputValue}  
                     placeholder="Type a message"
                  />
-                <button class="msg_send_btn" type="button" onClick = { this.props.sendMessage(this.state.inputValue) }><LogoPlane /></button>
+                <button className="msg_send_btn" type="button" onClick = { this.sendMessage }><LogoPlane /></button>
                 </div>
             </div>
         );

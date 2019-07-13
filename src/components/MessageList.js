@@ -1,5 +1,6 @@
 import React from 'react';
 import Message from './Message.js';
+import './MessageList.css';
 
 export default class MessageList extends React.Component {
 

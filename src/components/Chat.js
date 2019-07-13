@@ -21,20 +21,18 @@ export default class Chat extends React.Component {
     }
 
     sendMessage = (text) => {
-        return () => {
-            const newMessage = {
-                // id: "9333000183100",
-                // user: "Sveta",
-                avatar: "https://i.pravatar.cc/300?img=14",
-                created_at:  Date.now().toString(),
-                message: text,
-                // marked_read: false
-            };
-
-            const copyData = this.state.data;
-            copyData.push(newMessage);
-            this.setState({ data: copyData });
+        const newMessage = {
+            id: "9333000183100",
+            user: "Sveta",
+            avatar: "https://i.pravatar.cc/300?img=14",
+            created_at:  Date.now().toString(),
+            message: text,
+            marked_read: false
         };
+        console.log(newMessage);
+        const copyData = this.state.data;
+        copyData.push(newMessage);
+        this.setState({ data: copyData });
     }
 
     render() {

@@ -21,7 +21,7 @@
     padding: 5px 10px 5px 12px;
     width: 100%;
 }
-.received_withd_msg svg {
+svg {
     width: 12px;
     float: right;
     margin: 8px 0 0;
@@ -35,5 +35,24 @@
     float: left;
 }
 .received_withd_msg { 
-    width: 57%;
+    width: 50%;
 }
+
+.sent_msg p {
+    box-sizing: border-box;
+    background: #05728f none repeat scroll 0 0;
+    border-radius: 3px;
+    font-size: 14px;
+    margin: 0; color:#fff;
+    padding: 5px 10px 5px 12px;
+    width:100%;
+  }
+  .outgoing_msg,
+  .incoming_msg{ 
+        overflow:hidden; 
+        margin:26px 0 26px;
+    }
+  .sent_msg {
+    float: right;
+    width: 50%;
+  }
