@@ -6,3 +6,9 @@
     margin: 40px auto 0 auto;
     border: 1px solid gray;
 }
+
+.break-line {
+    text-align: center;
+    color: gray;
+    font-size: 14px;
+}

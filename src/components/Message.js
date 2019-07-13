@@ -6,7 +6,7 @@ import { ReactComponent as EditLogo } from './edit.svg';
 export default class Message extends React.Component {
     render() {
         const message = this.props.message;
-        if (message.user === 'Sveta')  //
+        if (message.is_mine)  //
             return (
                 <div className="outgoing_msg">
                     <div className="sent_msg">
