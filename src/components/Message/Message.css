@@ -22,10 +22,12 @@
     width: 100%;
 }
 .sent_msg .edit-btn,
-.like-btn {
+.like-btn,
+.delete-btn {
     width: 12px;
+    height: 12px;
     float: right;
-    margin: 8px 0 0;
+    margin: 8px 0 0 8px;
     padding: 0;
     border: none;
     background-color: transparent;

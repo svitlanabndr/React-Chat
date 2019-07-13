@@ -20,32 +20,8 @@ export default class Chat extends React.Component {
 
 		this.closeModal = this.closeModal.bind(this);
 		this.openModal = this.openModal.bind(this);
+		this.deleteMessage = this.deleteMessage.bind(this);
     }
-
-    closeModal() {
-        const currentEditId = this.state.editId;
-        const newData = this.state.data.map(obj => {
-            if (obj.id === currentEditId) {
-                obj.message = this.state.editValue;
-            } 
-            return obj;
-        })
-        
-		this.setState({
-            isModalOpen: false,
-            editValue: undefined,
-            editId: undefined,
-            data: newData
-		});
-	}
-
-	openModal(id) {
-		this.setState({ 
-            editValue: this.state.data.find((obj) => obj.id === id).message,
-            isModalOpen: true,
-            editId: id
-		});
-	}
 
     componentDidMount() {
         fetch('https://api.myjson.com/bins/1hiqin')
@@ -77,10 +53,41 @@ export default class Chat extends React.Component {
             }
             if (currentMessage.is_mine){ 
                 currentMessage.openModal = this.openModal;
+                currentMessage.deleteMessage = this.deleteMessage;
             }
             props.push(currentMessage);
         });
         return props;
+    }
+
+	openModal(id) {
+		this.setState({ 
+            editValue: this.state.data.find((obj) => obj.id === id).message,
+            isModalOpen: true,
+            editId: id
+		});
+    }
+
+    closeModal() {
+        const currentEditId = this.state.editId;
+        const newData = this.state.data.map(obj => {
+            if (obj.id === currentEditId) 
+                obj.message = this.state.editValue;
+            return obj;
+        });
+        
+		this.setState({
+            isModalOpen: false,
+            editValue: undefined,
+            editId: undefined,
+            data: newData
+		});
+    }
+    
+    deleteMessage(id) {
+        this.setState({
+            data: this.state.data.filter(obj => obj.id !== id)
+        });
     }
 
     getId = () => Math.floor(Math.random() * 1000000).toString();
