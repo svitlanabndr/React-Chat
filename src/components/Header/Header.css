@@ -1,0 +1,16 @@
+.header {
+    border-top: 1px solid #c4c4c4;
+    position: relative;
+    width: 60%;
+    margin: 40px auto 0 auto;
+    border: 1px solid gray;
+    padding: 0 15px 0 25px;  
+}
+
+.header span {
+    padding-left: 15px;
+}
+
+.date {
+    float: right;
+}

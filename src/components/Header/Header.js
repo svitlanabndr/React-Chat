@@ -1,4 +1,5 @@
 import React from 'react';
+import './Header.css'
 
 export default class Header extends React.Component {
     shouldComponentUpdate(nextProps) {
@@ -12,6 +13,11 @@ export default class Header extends React.Component {
 
     render() {
         console.log(this.props.data);
-        return <div className = 'Header'>Header</div>
+        return <div className = 'header'>
+            <span className = 'title'>React Chat</span>
+            <span className = 'participants'>{this.props.data.usersAmount} participants</span>
+            <span className = 'messages'>{this.props.data.messagesAmount} messages</span>
+            <span className = 'date'>last message at {this.props.data.lastMessageTime}</span>
+        </div>
     }
 }
