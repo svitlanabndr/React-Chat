@@ -11,11 +11,15 @@ export default class Message extends React.Component {
     like = () => this.props.message.likeMessage(this.props.message.id);
     
     shouldComponentUpdate(nextProps) {
-        if(nextProps.message ===  this.props.message) return false;
+        if(
+            nextProps.message.message ===  this.props.message.message &&
+            nextProps.message.is_liked ===  this.props.message.is_liked
+            ) return false;
         return true;
     }
 
     render() {
+        console.log('message rendered');
         const message = this.props.message;
         if (message.is_mine) 
             return (

@@ -4,10 +4,11 @@ import './MessageList.css';
 
 export default class MessageList extends React.Component {
     shouldComponentUpdate(nextProps) {
-        if(nextProps.data ===  this.props.data) return false;
+        if(JSON.stringify(nextProps.data) == JSON.stringify(this.props.data)) return false;
         return true;
     }
     render() {
+        console.log('message list rendered');
         const messageListItems = this.props.data.map((message) => {
             if (message.break_date) {
                 return <p className = 'break-line'>-------{ message.break_date }-------</p>
