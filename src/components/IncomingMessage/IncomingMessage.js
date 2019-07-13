@@ -17,7 +17,7 @@ export default class Message extends React.Component {
 
         return (
             <div className = 'incoming_msg'>
-                <div className = 'incoming_msg_img'><img src = { message.avatar.toString() } /></div>
+                <div className = 'incoming_msg_img'><img src = { message.avatar.toString() } alt='avatar'/></div>
                 <div className = 'received_msg'>
                     <div className = 'received_withd_msg'>
                         <p>{ message.message }</p>

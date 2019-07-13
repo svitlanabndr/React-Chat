@@ -5,7 +5,7 @@ import './MessageList.css';
 
 export default class MessageList extends React.Component {
     shouldComponentUpdate(nextProps) {
-        if(JSON.stringify(nextProps.data) == JSON.stringify(this.props.data)) return false;
+        if(JSON.stringify(nextProps.data) === JSON.stringify(this.props.data)) return false;
         return true;
     }
     render() {
