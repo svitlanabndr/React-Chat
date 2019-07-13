@@ -4,6 +4,7 @@ import MessageList from '../MessageList/MessageList.js';
 import MessageInput from '../MessageInput/MessageInput.js';
 import EditModal from '../EditModal/EditModal.js';
 import './Chat.css';
+import logo from './logo.png'
 
 export default class Chat extends React.Component {
 
@@ -164,7 +165,7 @@ export default class Chat extends React.Component {
     render() {
         const { data, isFetching, error } = this.state;
 
-        if (isFetching) return <div className='loading'>Loading...</div>; //add spinner
+        if (isFetching) return <div className='loading'><img className='loading-logo' src={logo} alt="Logo" /></div>; //add spinner
 
         if (error) return <div>Error: {error.message}</div>;
         return (<div>
