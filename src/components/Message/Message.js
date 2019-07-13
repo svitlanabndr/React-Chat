@@ -1,5 +1,6 @@
 import React from 'react';
 import './Message.css';
+import { ReactComponent as UnlikeLogo } from './unlike.svg';
 import { ReactComponent as LikeLogo } from './like.svg';
 import { ReactComponent as EditLogo } from './edit.svg';
 import { ReactComponent as DeleteLogo } from './delete.svg';
@@ -7,6 +8,7 @@ import { ReactComponent as DeleteLogo } from './delete.svg';
 export default class Message extends React.Component {
     openEdit = () => this.props.message.openModal(this.props.message.id);
     delete = () => this.props.message.deleteMessage(this.props.message.id);
+    like = () => this.props.message.likeMessage(this.props.message.id);
 
     render() {
         const message = this.props.message;
@@ -21,6 +23,7 @@ export default class Message extends React.Component {
                     </div>
                 </div>
             );
+        const logo = message.is_liked ? <LikeLogo/> : <UnlikeLogo />;
 
         return (
             <div className = 'incoming_msg'>
@@ -29,7 +32,9 @@ export default class Message extends React.Component {
                     <div className = 'received_withd_msg'>
                         <p>{ message.message }</p>
                         <span className = 'time_date'>{ message.created_at }</span>
-                        <button type="button" className='like-btn' onClick = { this.clickLike }>< LikeLogo /></button>
+                        <button type="button" className='like-btn' onClick = { this.like }>
+                            { logo }
+                        </button>
                     </div>
                 </div>
             </div>

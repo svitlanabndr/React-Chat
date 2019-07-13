@@ -17,7 +17,6 @@ export default class MessageInput extends React.Component {
     }
 
     sendMessage = () => {
-        console.log(this.state.inputValue);
         this.props.sendMessage(this.state.inputValue);
         this.setState({
             inputValue: ''

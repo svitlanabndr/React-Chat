@@ -17,16 +17,19 @@ export default class Chat extends React.Component {
             editValue: undefined,
             editId: undefined
          };
-
 		this.closeModal = this.closeModal.bind(this);
 		this.openModal = this.openModal.bind(this);
-		this.deleteMessage = this.deleteMessage.bind(this);
+        this.deleteMessage = this.deleteMessage.bind(this);
+        this.likeMessage = this.likeMessage.bind(this);
     }
 
     componentDidMount() {
         fetch('https://api.myjson.com/bins/1hiqin')
             .then(response => response.json())
-            .then(result => this.setState({ data: result, isFetching: false }))
+            .then(result => this.setState({ data: result.map(obj => {
+                obj.is_liked = false;
+                return obj;
+            }), isFetching: false }))
             .catch(e => {
               console.log(e);
               this.setState({ isFetching: false, error: e });
@@ -49,11 +52,14 @@ export default class Chat extends React.Component {
                 avatar: object.avatar,
                 created_at: object.created_at,
                 message: object.message,
+                is_liked: object.is_liked,
                 is_mine: object.user === 'Sveta'
             }
-            if (currentMessage.is_mine){ 
+            if (currentMessage.is_mine) { 
                 currentMessage.openModal = this.openModal;
                 currentMessage.deleteMessage = this.deleteMessage;
+            } else {
+                currentMessage.likeMessage = this.likeMessage;
             }
             props.push(currentMessage);
         });
@@ -90,6 +96,16 @@ export default class Chat extends React.Component {
         });
     }
 
+    likeMessage(id) {
+        this.setState({
+            data: this.state.data.map(obj => {
+                if (obj.id === id)
+                    obj.is_liked = !obj.is_liked;
+                return obj;
+            })
+        });
+    }
+
     getId = () => Math.floor(Math.random() * 1000000).toString();
 
     getDayFromFormattedDate(formattedDate) {
@@ -123,9 +139,9 @@ export default class Chat extends React.Component {
             avatar: "https://i.pravatar.cc/300?img=14",
             created_at:  this.getFormattedDate(),
             message: text,
+            is_liked: false,
             marked_read: false
         };
-        console.log(newMessage);
         const copyData = this.state.data;
         copyData.push(newMessage);
         this.setState({ data: copyData });
@@ -143,7 +159,6 @@ export default class Chat extends React.Component {
         if (isFetching) return <div className='loading'>Loading...</div>; //add spinner
 
         if (error) return <div>Error: {error.message}</div>;
-        console.log(data);
         return (<div>
                 {/* <Header/> */}
                 <MessageList data = { this.makeMessageListProps(data) } />
