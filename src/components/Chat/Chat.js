@@ -4,19 +4,14 @@ import MessageList from '../MessageList/MessageList.js';
 import MessageInput from '../MessageInput/MessageInput.js';
 import EditModal from '../EditModal/EditModal.js';
 import './Chat.css';
-import logo from './logo.png'
+import logo from './logo.png';
+import { connect } from 'react-redux';
+import * as actions from './actions';
 
-export default class Chat extends React.Component {
+class Chat extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            data: [], 
-            isFetching: true, 
-            error: null, 
-            isModalOpen: false, 
-            editValue: undefined,
-            editId: undefined
-         };
+
 		this.closeModal = this.closeModal.bind(this);
 		this.openModal = this.openModal.bind(this);
         this.deleteMessage = this.deleteMessage.bind(this);
@@ -26,13 +21,10 @@ export default class Chat extends React.Component {
     componentDidMount() {
         fetch('https://api.myjson.com/bins/1hiqin')
             .then(response => response.json())
-            .then(result => this.setState({ data: result.map(obj => {
-                obj.is_liked = false;
-                return obj;
-            }), isFetching: false }))
+            .then(result =>  this.props.loadSuccess(result) )  //dispatch
             .catch(e => {
               console.log(e);
-              this.setState({ isFetching: false, error: e });
+              this.props.loadFail(e);
             });
     }
 
@@ -162,14 +154,15 @@ export default class Chat extends React.Component {
     }
 
     render() {
-        const { data, isFetching, error } = this.state;
-
+        console.log(this.props);
+        const { messageList, isFetching, error } = this.props;
+        console.log(messageList, isFetching, error);
         if (isFetching) return <div className='loading'><img className='loading-logo' src={logo} alt="Logo" /></div>; //add spinner
 
         if (error) return <div>Error: {error.message}</div>;
         return (<div>
-                <Header data = { this.makeHeaderProps(data) }/>
-                <MessageList data = { this.makeMessageListProps(data) } />
+                <Header data = { this.makeHeaderProps(messageList) }/>
+                <MessageList data = { this.makeMessageListProps(messageList) } />
                 <MessageInput sendMessage = { this.sendMessage }/>
                 <EditModal isModalOpen={this.state.isModalOpen} closeModal={this.closeModal} >
                     <input type="text" 
@@ -182,5 +175,15 @@ export default class Chat extends React.Component {
             </div>
         );
     }
-  }
+}
 
+function mapStateToProps(state) {
+    const { messageList, isFetching, error, isModalOpen, editValue, editId } = state
+    return { messageList, isFetching, error, isModalOpen, editValue, editId };
+}
+
+const mapDispatchToProps = {
+    ...actions
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
