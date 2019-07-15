@@ -1,4 +1,12 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE, DELETE_MESSAGE, UPDATE_MESSAGE } from "./actionTypes";
+import { 
+    LOAD_SUCCESS, 
+    LOAD_FAIL, 
+    ADD_MESSAGE, 
+    UPDATE_INPUT, 
+    LIKE_MESSAGE, 
+    DELETE_MESSAGE, 
+    UPDATE_MESSAGE 
+} from "./actionTypes";
 
 const initialState =  { 
     messageList: [], 

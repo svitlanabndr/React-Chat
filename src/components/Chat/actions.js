@@ -1,4 +1,14 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE, DELETE_MESSAGE, UPDATE_MESSAGE } from "./actionTypes";
+import { 
+    LOAD_SUCCESS, 
+    LOAD_FAIL, 
+    ADD_MESSAGE, 
+    UPDATE_INPUT, 
+    LIKE_MESSAGE, 
+    DELETE_MESSAGE, 
+    UPDATE_MESSAGE 
+} from "./actionTypes";
+
+import { getFormattedDate, getId } from './service';
 
 export const loadSuccess = (messageList) => ({
     type: LOAD_SUCCESS,
@@ -23,7 +33,7 @@ export const addMessage = () => ({
     type: ADD_MESSAGE,
     payload: {
         newMessage: {
-            id:  Math.floor(Math.random() * 1000000).toString(),
+            id:  getId(),
             user: "Sveta",
             avatar: "https://i.pravatar.cc/300?img=14",
             created_at:  getFormattedDate(),
@@ -55,17 +65,3 @@ export const updateMessage = (id, newMessage) => ({
         newMessage
     }
 });
-
-const getFormattedDate = () => {
-    const now = new Date();
-
-    let dd = now.getDate();
-    if (dd < 10) dd = '0' + dd;
-
-    let mm = now.getMonth() + 1;
-    if (mm < 10) mm = '0' + mm;
-
-    const date = now.getFullYear()+'-'+mm+'-'+dd;
-    const time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-    return date+' '+time;
-}

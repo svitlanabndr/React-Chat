@@ -1,4 +1,8 @@
-import { OPEN_MODAL, UPDATE_EDIT, CLOSE_MODAL } from "./actionTypes";
+import { 
+    OPEN_MODAL, 
+    UPDATE_EDIT, 
+    CLOSE_MODAL 
+} from "./actionTypes";
 
 const initialState =  { 
     isModalOpen: false, 
