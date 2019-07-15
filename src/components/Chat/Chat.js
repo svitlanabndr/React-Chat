@@ -21,11 +21,8 @@ class Chat extends React.Component {
     componentDidMount() {
         fetch('https://api.myjson.com/bins/1hiqin')
             .then(response => response.json())
-            .then(result =>  this.props.loadSuccess(result) )  //dispatch
-            .catch(e => {
-              console.log(e);
-              this.props.loadFail(e);
-            });
+            .then(this.props.loadSuccess) 
+            .catch(this.props.loadFail);
     }
 
     makeHeaderProps = (data) => {
@@ -67,11 +64,11 @@ class Chat extends React.Component {
     }
 
 	openModal(id) {
-		this.setState({ 
-            editValue: this.state.data.find((obj) => obj.id === id).message,
-            isModalOpen: true,
-            editId: id
-		});
+		// this.setState({ 
+        //     editValue: this.state.data.find((obj) => obj.id === id).message,
+        //     isModalOpen: true,
+        //     editId: id
+		// });
     }
 
     closeModal() {
@@ -82,31 +79,29 @@ class Chat extends React.Component {
             return obj;
         });
         
-		this.setState({
-            isModalOpen: false,
-            editValue: undefined,
-            editId: undefined,
-            data: newData
-		});
+		// this.setState({
+        //     isModalOpen: false,
+        //     editValue: undefined,
+        //     editId: undefined,
+        //     data: newData
+		// });
     }
     
     deleteMessage(id) {
-        this.setState({
-            data: this.state.data.filter(obj => obj.id !== id)
-        });
+        // this.setState({
+        //     data: this.state.data.filter(obj => obj.id !== id)
+        // });
     }
 
     likeMessage(id) {
-        this.setState({
-            data: this.state.data.map(obj => {
-                if (obj.id === id)
-                    obj.is_liked = !obj.is_liked;
-                return obj;
-            })
-        });
+        // this.setState({
+        //     data: this.state.data.map(obj => {
+        //         if (obj.id === id)
+        //             obj.is_liked = !obj.is_liked;
+        //         return obj;
+        //     })
+        // });
     }
-
-    getId = () => Math.floor(Math.random() * 1000000).toString();
 
     getDayFromFormattedDate(formattedDate) {
         const date = formattedDate.split(' ');
@@ -118,67 +113,30 @@ class Chat extends React.Component {
         return date[0];
     }
 
-    getFormattedDate = () => {
-        const now = new Date();
-
-        let dd = now.getDate();
-        if (dd < 10) dd = '0' + dd;
-
-        let mm = now.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
-
-        const date = now.getFullYear()+'-'+mm+'-'+dd;
-        const time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        return date+' '+time;
-    }
-
-    sendMessage = (text) => {
-        const newMessage = {
-            id: this.getId(),
-            user: "Sveta",
-            avatar: "https://i.pravatar.cc/300?img=14",
-            created_at:  this.getFormattedDate(),
-            message: text,
-            is_liked: false,
-            marked_read: false
-        };
-        const copyData = this.state.data;
-        copyData.push(newMessage);
-        this.setState({ data: copyData });
-    }
-
-    updateEditValue = evt => {
-        this.setState({
-          editValue: evt.target.value
-        });
-    }
-
     render() {
-        console.log(this.props);
         const { messageList, isFetching, error } = this.props;
-        console.log(messageList, isFetching, error);
         if (isFetching) return <div className='loading'><img className='loading-logo' src={logo} alt="Logo" /></div>; //add spinner
 
         if (error) return <div>Error: {error.message}</div>;
         return (<div>
-                <Header data = { this.makeHeaderProps(messageList) }/>
+                {/* <Header data = { this.makeHeaderProps(messageList) }/> */}
                 <MessageList data = { this.makeMessageListProps(messageList) } />
-                <MessageInput sendMessage = { this.sendMessage }/>
-                <EditModal isModalOpen={this.state.isModalOpen} closeModal={this.closeModal} >
+                <MessageInput/>
+                {/* <EditModal isModalOpen={this.state.isModalOpen} closeModal={this.closeModal} >
                     <input type="text" 
                         value={this.state.editValue} 
                         onChange={this.updateEditValue} />
                     <button className = 'edit-btn' onClick={this.closeModal}>
                         Edit
                     </button>
-                </EditModal>
+                </EditModal> */}
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { messageList, isFetching, error, isModalOpen, editValue, editId } = state
+    const { messageList, isFetching, error, isModalOpen, editValue, editId } = state.chat
     return { messageList, isFetching, error, isModalOpen, editValue, editId };
 }
 

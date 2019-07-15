@@ -1,4 +1,4 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE } from "./actionTypes";
+import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT } from "./actionTypes";
 
 export const loadSuccess = (messageList) => ({
     type: LOAD_SUCCESS,
@@ -20,9 +20,38 @@ export const loadFail = (error) => ({
 
 });
 
-export const addMessage = (text) => ({
+export const addMessage = () => ({
     type: ADD_MESSAGE,
     payload: {
-        newMessage: {} 
+        newMessage: {
+            id:  Math.floor(Math.random() * 1000000).toString(),
+            user: "Sveta",
+            avatar: "https://i.pravatar.cc/300?img=14",
+            created_at:  getFormattedDate(),
+            message: '',
+            is_liked: false,
+            marked_read: false
+        } 
     }
 });
+
+export const updateInput = (newInput) => ({
+    type: UPDATE_INPUT,
+    payload: {
+        inputValue: newInput
+    }
+});
+
+const getFormattedDate = () => {
+    const now = new Date();
+
+    let dd = now.getDate();
+    if (dd < 10) dd = '0' + dd;
+
+    let mm = now.getMonth() + 1;
+    if (mm < 10) mm = '0' + mm;
+
+    const date = now.getFullYear()+'-'+mm+'-'+dd;
+    const time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    return date+' '+time;
+}

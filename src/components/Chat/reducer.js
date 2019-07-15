@@ -1,4 +1,4 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE } from "./actionTypes";
+import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT } from "./actionTypes";
 
 const initialState =  { 
     messageList: [], 
@@ -6,28 +6,41 @@ const initialState =  {
     error: null, 
     isModalOpen: false, 
     editValue: undefined,
-    editId: undefined
+    editId: undefined,
+    inputValue: ''
  };
 
 export default function (state = initialState, action) {
-    console.log('reducer')
     switch (action.type) {
         case LOAD_SUCCESS:
-            const { messageList } = action.payload;
-            state.messageList = messageList;
-            return state;
-            
-        case LOAD_FAIL:
-            const { error, isFetching } = action.payload;
-            state.error = error;
-            state.isFetching = isFetching;
-            return state;
+            return { 
+                ...state, 
+                messageList: action.payload.messageList, 
+                isFetching: action.payload.isFetching 
+            }
 
+        case LOAD_FAIL:
+            return { 
+                ...state, 
+                error: action.payload.error, 
+                isFetching: action.payload.isFetching 
+            }
+        
         case ADD_MESSAGE:
             const { newMessage } = action.payload;
-            state.messageList.push(newMessage);
-            return state;
-            
+            newMessage.message = state.inputValue;
+            return {
+                ...state,
+                messageList: [...state.messageList, newMessage],
+                inputValue: ''
+            };
+
+        case UPDATE_INPUT:
+            return {
+                ...state,
+                inputValue: action.payload.inputValue
+            };
+
         default:
             return state;
     }
