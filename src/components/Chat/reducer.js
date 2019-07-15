@@ -1,4 +1,4 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE } from "./actionTypes";
+import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE, DELETE_MESSAGE } from "./actionTypes";
 import { stat } from "fs";
 
 const initialState =  { 
@@ -12,6 +12,7 @@ const initialState =  {
  };
 
 export default function (state = initialState, action) {
+    let newMessageList = [];
     switch (action.type) {
         case LOAD_SUCCESS:
             return { 
@@ -43,12 +44,18 @@ export default function (state = initialState, action) {
             };
 
         case LIKE_MESSAGE:
-            state.messageList.find(obj => obj.id === action.payload.id)
-            const newMessageList = state.messageList.map(obj => {
+            newMessageList = state.messageList.map(obj => {
                 if(obj.id === action.payload.id)
                     obj.is_liked = !obj.is_liked;
                 return obj;
             });
+            return {
+                ...state,
+                messageList: newMessageList
+            }
+
+        case DELETE_MESSAGE:
+            newMessageList = state.messageList.filter(obj => obj.id !== action.payload.id);
             return {
                 ...state,
                 messageList: newMessageList

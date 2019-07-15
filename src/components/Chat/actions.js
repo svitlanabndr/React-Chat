@@ -1,4 +1,4 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE } from "./actionTypes";
+import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE, DELETE_MESSAGE } from "./actionTypes";
 
 export const loadSuccess = (messageList) => ({
     type: LOAD_SUCCESS,
@@ -44,6 +44,13 @@ export const updateInput = (newInput) => ({
 
 export const likeMessage = id => ({
     type: LIKE_MESSAGE,
+    payload: {
+        id
+    }
+});
+
+export const deleteMessage = id => ({
+    type: DELETE_MESSAGE,
     payload: {
         id
     }

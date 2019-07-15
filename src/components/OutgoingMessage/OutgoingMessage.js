@@ -3,10 +3,12 @@ import './OutgoingMessage.css';
 import { ReactComponent as EditLogo } from './edit.svg';
 import { ReactComponent as DeleteLogo } from './delete.svg';
 import PropTypes from 'prop-types';
+import { deleteMessage } from '../Chat/actions';
+import { connect } from 'react-redux';
 
-export default class OutgoingMessage extends React.Component {
+class OutgoingMessage extends React.Component {
     openEdit = () => this.props.message.openModal(this.props.message.id);
-    delete = () => this.props.message.deleteMessage(this.props.message.id);
+    // delete = () => this.props.message.deleteMessage(this.props.message.id);
     
     shouldComponentUpdate(nextProps) {
         if(nextProps.message.message ===  this.props.message.message) return false;
@@ -20,7 +22,7 @@ export default class OutgoingMessage extends React.Component {
                 <div className="sent_msg">
                     <p>{ message.message }</p>
                     <span className="time_date">{ message.created_at }</span> 
-                    <button type="button" className='delete-btn' onClick={this.delete}>< DeleteLogo /></button>      
+                    <button type="button" className='delete-btn' onClick={ () => this.props.deleteMessage(message.id) }>< DeleteLogo /></button>      
                     <button type="button" className='edit-btn' onClick={this.openEdit}>< EditLogo /></button>
                 </div>
             </div>
@@ -36,7 +38,17 @@ OutgoingMessage.propTypes = {
         message: PropTypes.string,
         is_liked: PropTypes.bool,
         is_mine: PropTypes.bool,
-        openModal: PropTypes.func,  
-        deleteMessage: PropTypes.func  
+        // openModal: PropTypes.func,  
+        // deleteMessage: PropTypes.func  
     }),
 };
+
+function mapStateToProps(state, ownProps) {
+    return { message: ownProps.message };
+}
+
+const mapDispatchToProps = {
+    deleteMessage
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OutgoingMessage)
