@@ -1,19 +1,16 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE, DELETE_MESSAGE } from "./actionTypes";
-import { stat } from "fs";
+import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE, DELETE_MESSAGE, UPDATE_MESSAGE } from "./actionTypes";
 
 const initialState =  { 
     messageList: [], 
     isFetching: true, 
     error: null, 
-    isModalOpen: false, 
-    editValue: undefined,
-    editId: undefined,
-    inputValue: ''
+    inputValue: '',
  };
 
 export default function (state = initialState, action) {
     let newMessageList = [];
     switch (action.type) {
+        
         case LOAD_SUCCESS:
             return { 
                 ...state, 
@@ -56,6 +53,17 @@ export default function (state = initialState, action) {
 
         case DELETE_MESSAGE:
             newMessageList = state.messageList.filter(obj => obj.id !== action.payload.id);
+            return {
+                ...state,
+                messageList: newMessageList
+            }
+        
+        case UPDATE_MESSAGE:
+            newMessageList = state.messageList.map(obj => {
+                if (obj.id === action.payload.id)
+                    obj.message = action.payload.newMessage;
+                return obj;
+            });
             return {
                 ...state,
                 messageList: newMessageList
