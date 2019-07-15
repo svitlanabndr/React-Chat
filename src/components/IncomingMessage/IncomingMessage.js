@@ -3,19 +3,19 @@ import './IncomingMessage.css';
 import { ReactComponent as UnlikeLogo } from './unlike.svg';
 import { ReactComponent as LikeLogo } from './like.svg';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { likeMessage } from '../Chat/actions';
 
-export default class IncomingMessage extends React.Component {
-    like = () => this.props.message.likeMessage(this.props.message.id);
-    
-    shouldComponentUpdate(nextProps) {
-        if(nextProps.message.is_liked ===  this.props.message.is_liked) return false;
-        return true;
-    }
+class IncomingMessage extends React.Component {    
+    // shouldComponentUpdate(nextProps) {
+    //     if(nextProps.message.is_liked ===  this.props.message.is_liked) return false;
+    //     return true;
+    // }
 
     render() {
         const message = this.props.message;
         const logo = message.is_liked ? <LikeLogo/> : <UnlikeLogo />;
-
+        const id = this.props.message.id;
         return (
             <div className = 'incoming_msg'>
                 <div className = 'incoming_msg_img'><img src = { message.avatar.toString() } alt='avatar'/></div>
@@ -23,7 +23,7 @@ export default class IncomingMessage extends React.Component {
                     <div className = 'received_withd_msg'>
                         <p>{ message.message }</p>
                         <span className = 'time_date'>{ message.created_at }</span>
-                        <button type="button" className='like-btn' onClick = { this.like }>
+                        <button type="button" className='like-btn' onClick = {() => this.props.likeMessage(id) }>
                             { logo }
                         </button>
                     </div>
@@ -41,6 +41,15 @@ IncomingMessage.propTypes = {
         message: PropTypes.string,
         is_liked: PropTypes.bool,
         is_mine: PropTypes.bool,
-        likeMessage: PropTypes.func  
     }),
 };
+
+function mapStateToProps(state, ownProps) {
+    return { message: ownProps.message };
+}
+
+const mapDispatchToProps = {
+    likeMessage
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IncomingMessage)

@@ -37,7 +37,7 @@ class Chat extends React.Component {
         let props = [];
         let previousDay;
         data.forEach(object => {
-            let currentDay = this.getDayFromFormattedDate(object.created_at);
+            let currentDay = new Date(object.created_at).getDate();
             if (previousDay !== currentDay) {
                 props.push({
                     break_date: this.getDateFromFormattedDate(object.created_at)
@@ -52,12 +52,12 @@ class Chat extends React.Component {
                 is_liked: object.is_liked,
                 is_mine: object.user === 'Sveta'
             }
-            if (currentMessage.is_mine) { 
-                currentMessage.openModal = this.openModal;
-                currentMessage.deleteMessage = this.deleteMessage;
-            } else {
-                currentMessage.likeMessage = this.likeMessage;
-            }
+            // if (currentMessage.is_mine) { 
+            //     currentMessage.openModal = this.openModal;
+            //     currentMessage.deleteMessage = this.deleteMessage;
+            // } else {
+            //     currentMessage.likeMessage = this.likeMessage;
+            // }
             props.push(currentMessage);
         });
         return props;
@@ -108,10 +108,7 @@ class Chat extends React.Component {
         return parseInt(date[0].split('-')[2]);
     }
 
-    getDateFromFormattedDate(formattedDate) {
-        const date = formattedDate.split(' ');
-        return date[0];
-    }
+    getDateFromFormattedDate = formattedDate => formattedDate.split(' ')[0];
 
     render() {
         const { messageList, isFetching, error } = this.props;

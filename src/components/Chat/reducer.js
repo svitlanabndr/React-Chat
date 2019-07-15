@@ -1,4 +1,5 @@
-import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT } from "./actionTypes";
+import { LOAD_SUCCESS, LOAD_FAIL, ADD_MESSAGE, UPDATE_INPUT, LIKE_MESSAGE } from "./actionTypes";
+import { stat } from "fs";
 
 const initialState =  { 
     messageList: [], 
@@ -40,6 +41,18 @@ export default function (state = initialState, action) {
                 ...state,
                 inputValue: action.payload.inputValue
             };
+
+        case LIKE_MESSAGE:
+            state.messageList.find(obj => obj.id === action.payload.id)
+            const newMessageList = state.messageList.map(obj => {
+                if(obj.id === action.payload.id)
+                    obj.is_liked = !obj.is_liked;
+                return obj;
+            });
+            return {
+                ...state,
+                messageList: newMessageList
+            }
 
         default:
             return state;
