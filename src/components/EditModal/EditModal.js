@@ -25,10 +25,10 @@ class Modal extends React.Component {
 				<div className='modal'>
 					<input 
 						type="text" 
-						value={this.props.editValue} 
-						onChange={ (evt) => this.props.updateEdit(evt.target.value) } 
+						value={ this.props.editValue } 
+						onChange={ evt => this.props.updateEdit(evt.target.value) } 
 					/>
-					<button className = 'edit-btn' onClick={() => {
+					<button className = 'edit-btn' onClick={ () => {
 						this.props.updateMessage(this.props.editId, this.props.editValue);
 						this.props.closeModal()
 					}}> Edit </button>

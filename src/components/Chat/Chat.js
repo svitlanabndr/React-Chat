@@ -9,8 +9,7 @@ import { connect } from 'react-redux';
 import * as actions from './actions';
 
 class Chat extends React.Component {
-
-    componentDidMount() {
+    componentWillMount() {
         fetch('https://api.myjson.com/bins/1hiqin')
             .then(response => response.json())
             .then(this.props.loadSuccess) 
@@ -22,7 +21,8 @@ class Chat extends React.Component {
         if (isFetching) return <div className='loading'><img className='loading-logo' src={logo} alt="Logo" /></div>;
 
         if (error) return <div>Error: {error.message}</div>;
-        return (<div>
+        return (
+            <div>
                 <Header/>
                 <MessageList/>
                 <MessageInput/>
