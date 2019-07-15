@@ -37,6 +37,7 @@ export const addMessage = () => ({
             user: "Sveta",
             avatar: "https://i.pravatar.cc/300?img=14",
             created_at:  getFormattedDate(),
+            is_mine: true,
             is_liked: false,
             marked_read: false
         } 

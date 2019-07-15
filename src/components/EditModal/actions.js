@@ -4,11 +4,12 @@ import {
     CLOSE_MODAL 
 } from "./actionTypes";
 
-export const openModal = (id, message) => ({
+export const openModal = (id, message, messageList = []) => ({
     type: OPEN_MODAL,
     payload: {
         id,
-        message
+        message,
+        messageList
     }
 });
 

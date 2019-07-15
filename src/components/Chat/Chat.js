@@ -7,6 +7,7 @@ import './Chat.css';
 import logo from './logo.png';
 import { connect } from 'react-redux';
 import * as actions from './actions';
+import { openModal } from '../EditModal/actions';
 
 class Chat extends React.Component {
     componentWillMount() {
@@ -22,7 +23,14 @@ class Chat extends React.Component {
 
         if (error) return <div>Error: {error.message}</div>;
         return (
-            <div>
+            <div 
+                tabIndex='0' 
+                onKeyDown = {
+                    e => {
+                        if (e.key === 'ArrowUp')
+                        this.props.openModal(undefined, undefined, this.props.messageList)
+                    }
+                }>
                 <Header/>
                 <MessageList/>
                 <MessageInput/>
@@ -39,7 +47,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    ...actions
+    ...actions,
+    openModal
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);
