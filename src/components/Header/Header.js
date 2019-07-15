@@ -1,13 +1,14 @@
 import React from 'react';
 import './Header.css';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
     shouldComponentUpdate(nextProps) {
         if(
-            nextProps.data.usersAmount === this.props.data.usersAmount &&
-            nextProps.data.messagesAmount === this.props.data.messagesAmount &&
-            nextProps.data.lastMessageTime === this.props.data.lastMessageTime
+            nextProps.usersAmount === this.props.usersAmount &&
+            nextProps.messagesAmount === this.props.messagesAmount &&
+            nextProps.lastMessageTime === this.props.lastMessageTime
             ) return false;
         return true;
     }
@@ -15,9 +16,9 @@ export default class Header extends React.Component {
     render() {
         return <div className = 'header'>
             <span className = 'title'>React Chat</span>
-            <span className = 'participants'>{this.props.data.usersAmount} participants</span>
-            <span className = 'messages'>{this.props.data.messagesAmount} messages</span>
-            <span className = 'date'>last message at {this.props.data.lastMessageTime}</span>
+            <span className = 'participants'>{this.props.usersAmount} participants</span>
+            <span className = 'messages'>{this.props.messagesAmount} messages</span>
+            <span className = 'date'>last message at {this.props.lastMessageTime}</span>
         </div>
     }
 }
@@ -29,3 +30,13 @@ Header.propTypes = {
         lastMessageTime: PropTypes.string
     }),
 };
+
+function mapStateToProps(state) {
+    const { messageList } = state.chat;
+    const usersAmount = messageList.reduce((set, next) => set.add(next.user), new Set()).size;
+    const messagesAmount = messageList.length;
+    const lastMessageTime = messageList[messageList.length - 1].created_at;
+    return { usersAmount, messagesAmount, lastMessageTime }
+}
+
+export default connect(mapStateToProps)(Header);

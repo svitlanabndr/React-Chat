@@ -17,14 +17,6 @@ class Chat extends React.Component {
             .catch(this.props.loadFail);
     }
 
-    makeHeaderProps = (data) => {
-
-        const usersAmount = data.reduce((set, next) => set.add(next.user), new Set()).size;
-        const messagesAmount = data.length;
-        const lastMessageTime = data[data.length - 1].created_at;
-        return { usersAmount, messagesAmount, lastMessageTime }
-    }
-
     makeMessageListProps = (data) => {
         let props = [];
         let previousDay;
@@ -62,7 +54,7 @@ class Chat extends React.Component {
 
         if (error) return <div>Error: {error.message}</div>;
         return (<div>
-                {/* <Header data = { this.makeHeaderProps(messageList) }/> */}
+                <Header/>
                 <MessageList data = { this.makeMessageListProps(messageList) } />
                 <MessageInput/>
                 <EditModal/>
