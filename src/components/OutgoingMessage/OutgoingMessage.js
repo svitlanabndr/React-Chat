@@ -8,10 +8,9 @@ import { openModal} from '../EditModal/actions';
 import { connect } from 'react-redux';
 
 class OutgoingMessage extends React.Component {  
-    // shouldComponentUpdate(nextProps) {
-    //     if(nextProps.message.message ===  this.props.message.message) return false;
-    //     return true;
-    // }
+    shouldComponentUpdate(nextProps) {
+        return nextProps.message.message !==  this.props.message.message;
+    }
 
     render() {
         const message = this.props.message;

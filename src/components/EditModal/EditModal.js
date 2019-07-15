@@ -6,12 +6,13 @@ import * as actions from './actions';
 import { updateMessage } from '../Chat/actions';
 
 class Modal extends React.Component {
-	// shouldComponentUpdate(nextProps) {
-    //     if(
-	// 		nextProps.isModalOpen ===  this.props.isModalOpen && 
-	// 		nextProps.children[0].props.value === this.props.children[0].props.value) return false;
-    //     return true;
-    // }
+	shouldComponentUpdate(nextProps) {
+		return (
+			nextProps.isModalOpen !==  this.props.isModalOpen || 
+			nextProps.editValue !== this.props.editValue
+		);
+	}
+	
 	render() {
 		return (
 			<div className = 'modal-wrp'
@@ -39,9 +40,9 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-	// children: PropTypes.arrayOf(PropTypes.object),
-	// closeModal: PropTypes.func,
-	// isModalOpen: PropTypes.bool,
+	isModalOpen: PropTypes.bool,
+	editId: PropTypes.string,
+	editValue: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {

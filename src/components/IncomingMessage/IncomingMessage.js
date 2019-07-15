@@ -7,10 +7,9 @@ import { connect } from 'react-redux';
 import { likeMessage } from '../Chat/actions';
 
 class IncomingMessage extends React.Component {    
-    // shouldComponentUpdate(nextProps) {
-    //     if(nextProps.message.is_liked ===  this.props.message.is_liked) return false;
-    //     return true;
-    // }
+    shouldComponentUpdate(nextProps) {
+        return nextProps.message.is_liked !==  this.props.message.is_liked;
+    }
 
     render() {
         const message = this.props.message;
@@ -41,7 +40,7 @@ IncomingMessage.propTypes = {
         message: PropTypes.string,
         is_liked: PropTypes.bool,
         is_mine: PropTypes.bool,
-    }),
+    })
 };
 
 function mapStateToProps(state, ownProps) {

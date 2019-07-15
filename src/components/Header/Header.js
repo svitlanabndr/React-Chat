@@ -5,12 +5,11 @@ import { connect } from 'react-redux';
 
 class Header extends React.Component {
     shouldComponentUpdate(nextProps) {
-        if(
-            nextProps.usersAmount === this.props.usersAmount &&
-            nextProps.messagesAmount === this.props.messagesAmount &&
-            nextProps.lastMessageTime === this.props.lastMessageTime
-            ) return false;
-        return true;
+        return (
+            nextProps.usersAmount !== this.props.usersAmount ||
+            nextProps.messagesAmount !== this.props.messagesAmount ||
+            nextProps.lastMessageTime !== this.props.lastMessageTime
+        );
     }
 
     render() {

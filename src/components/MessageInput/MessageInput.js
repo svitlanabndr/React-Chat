@@ -6,10 +6,9 @@ import { updateInput, addMessage } from '../Chat/actions';
 import { connect } from 'react-redux';
 
 class MessageInput extends React.Component {
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if(nextState ===  this.state) return false;
-    //     return true;
-    // }
+    shouldComponentUpdate(nextProps) {
+        return nextProps.inputValue !==  this.props.inputValue;
+    }
    
     render() {
         return (
@@ -28,7 +27,7 @@ class MessageInput extends React.Component {
 }
 
 MessageInput.propTypes = {
-	sendMessage: PropTypes.func
+	inputValue: PropTypes.string
 };
 
 function mapStateToProps(state) {
