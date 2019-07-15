@@ -35,3 +35,11 @@
     border: none;
     background-color: transparent;
 }
+
+.outgoing_msg .edit-btn { 
+    visibility: hidden;
+}
+
+.outgoing_msg:hover .edit-btn { 
+    visibility: visible;
+}
