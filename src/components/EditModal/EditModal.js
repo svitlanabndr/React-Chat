@@ -5,14 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './actions';
 import { updateMessage } from '../Chat/actions';
 
-class Modal extends React.Component {
-	shouldComponentUpdate(nextProps) {
-		return (
-			nextProps.isModalOpen !==  this.props.isModalOpen || 
-			nextProps.editValue !== this.props.editValue
-		);
-	}
-	
+class Modal extends React.PureComponent {
 	render() {
 		return (
 			<div className = 'modal-wrp'

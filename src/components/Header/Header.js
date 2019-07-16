@@ -3,15 +3,7 @@ import './Header.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class Header extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return (
-            nextProps.usersAmount !== this.props.usersAmount ||
-            nextProps.messagesAmount !== this.props.messagesAmount ||
-            nextProps.lastMessageTime !== this.props.lastMessageTime
-        );
-    }
-
+class Header extends React.PureComponent {
     render() {
         return <div className = 'header'>
             <span className = 'title'>React Chat</span>

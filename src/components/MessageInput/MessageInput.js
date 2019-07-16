@@ -5,11 +5,7 @@ import PropTypes from 'prop-types';
 import { updateInput, addMessage } from '../Chat/actions';
 import { connect } from 'react-redux';
 
-class MessageInput extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.inputValue !==  this.props.inputValue;
-    }
-   
+class MessageInput extends React.PureComponent { 
     render() {
         return (
             <div className="type_msg">
