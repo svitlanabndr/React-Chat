@@ -7,10 +7,10 @@ import {
 
 export function* fetchMessages() {
 	try {
-		const messages = yield call(axios.get, `https://api.myjson.com/bins/1hiqin`);
+		const messages = yield call(axios.get, '/express_backend');
 		yield put({ type: 'FETCH_MESSAGES_SUCCESS', payload: { messageList: messages.data, isFetching: false } })
 	} catch (error) {
-        yield put({ type: 'FETCH_MESSAGES_FAIL', payload: { error: error.message, isFetching: false } })
+        yield put({ type: 'FETCH_MESSAGES_FAIL', payload: { error: error, isFetching: false } })
 	}
 }
 
