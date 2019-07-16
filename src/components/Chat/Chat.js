@@ -10,13 +10,10 @@ import * as actions from './actions';
 import { openModal } from '../EditModal/actions';
 
 class Chat extends React.Component {
-    componentWillMount() {
-        fetch('https://api.myjson.com/bins/1hiqin')
-            .then(response => response.json())
-            .then(this.props.loadSuccess) 
-            .catch(this.props.loadFail);
+    componentDidMount() {
+		this.props.fetchMessages();
     }
-
+    
     render() {
         const { isFetching, error } = this.props;
         if (isFetching) return <div className='loading'><img className='loading-logo' src={logo} alt="Logo" /></div>;

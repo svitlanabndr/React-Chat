@@ -1,6 +1,6 @@
 import { 
-    LOAD_SUCCESS, 
-    LOAD_FAIL, 
+    FETCH_MESSAGES_SUCCESS,
+    FETCH_MESSAGES_FAIL,
     ADD_MESSAGE, 
     UPDATE_INPUT, 
     LIKE_MESSAGE, 
@@ -19,14 +19,14 @@ export default function (state = initialState, action) {
     let newMessageList = [];
     switch (action.type) {
         
-        case LOAD_SUCCESS:
+        case FETCH_MESSAGES_SUCCESS:
             return { 
                 ...state, 
                 messageList: action.payload.messageList, 
                 isFetching: action.payload.isFetching 
             }
 
-        case LOAD_FAIL:
+        case FETCH_MESSAGES_FAIL:
             return { 
                 ...state, 
                 error: action.payload.error, 

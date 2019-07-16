@@ -1,6 +1,5 @@
 import { 
-    LOAD_SUCCESS, 
-    LOAD_FAIL, 
+    FETCH_MESSAGES,
     ADD_MESSAGE, 
     UPDATE_INPUT, 
     LIKE_MESSAGE, 
@@ -10,23 +9,8 @@ import {
 
 import { getFormattedDate, getId } from './service';
 
-export const loadSuccess = (messageList) => ({
-    type: LOAD_SUCCESS,
-    payload: {
-        messageList: messageList.map(obj => {
-                obj.is_liked = false;
-                return obj;
-            }), 
-        isFetching: false 
-    }
-});
-
-export const loadFail = (error) => ({
-    type: LOAD_FAIL,
-    payload: {
-        error,
-        isFetching: false
-    }
+export const fetchMessages = () => ({
+    type: FETCH_MESSAGES
 });
 
 export const addMessage = () => ({
