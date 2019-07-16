@@ -12,13 +12,13 @@ class MessageList extends React.Component {
     }
 
     render() {
-        const messageListItems = this.props.data.map((message) => {
+        const messageListItems = this.props.data.map((message, i) => {
             if (message.break_date) {
-                return <p className = 'break-line'>{ message.break_date }</p>
+                return <p className = 'break-line' key = { i }>{ message.break_date }</p>
             } else {
                 return message.is_mine ? 
-                    <OutgoingMessage message = {message} /> : 
-                    <IncomingMessage message = {message} />
+                    <OutgoingMessage message = { message } key = { message.id }/> : 
+                    <IncomingMessage message = { message } key = { message.id }/>
             }
         });
 
