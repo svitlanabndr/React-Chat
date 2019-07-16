@@ -1,6 +1,8 @@
 import React from 'react';
 import ErrorBoundary from './error/ErrorBoundary';
-import Chat from './components/Chat/Chat.js';
+import Chat from './ChatPage/Chat/Chat.js';
+import LoginForm from './LoginPage/LoginForm.js';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -8,7 +10,10 @@ function App() {
   return (
     <div>
       <ErrorBoundary>
-        <Chat />
+        <Switch>
+          <Route exact path='/chat' component={Chat} />
+          <Route exact path="/login" component={LoginForm} />
+			</Switch>
       </ErrorBoundary>
     </div>
   );

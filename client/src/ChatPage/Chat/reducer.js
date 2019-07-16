@@ -13,7 +13,7 @@ const initialState =  {
     isFetching: true, 
     error: null, 
     inputValue: '',
- };
+};
 
 export default function (state = initialState, action) {
     let newMessageList = [];

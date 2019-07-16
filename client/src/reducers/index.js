@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import chat from "../components/Chat/reducer";
-import editModal from "../components/EditModal/reducer";
+import chat from "../ChatPage/Chat/reducer";
+import editModal from "../ChatPage/EditModal/reducer";
+import login from "../LoginPage/reducer";
 
 const rootReducer = combineReducers({
     chat,
-    editModal
+    editModal,
+    login
 });
 
 export default rootReducer;
