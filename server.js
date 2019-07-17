@@ -13,6 +13,17 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
+app.post('/', (req, res) => {
+    console.log(req.body);
+    const verified = jwt.verify(req.body.jwt, 'secret');
+    console.log(verified);
+    if (!verified) res.status(401).json({ auth: false });
+    const user = users.find(user => user.login === verified.login);
+    user.login === 'admin' && user.password === 'admin' ?
+        res.status(200).json({ auth: true, admin: user }) :
+        res.status(200).json({ auth: true, user });    
+});
+
 app.get('/chat', (req, res) => {
     res.send(messages);
 });

@@ -19,5 +19,12 @@
         "login": "your_dream",
         "email": "betty_wow@gmail.com",
         "password": "1"
+    },
+    {
+        "id": "4",
+        "name": "Sveta",
+        "login": "admin",
+        "email": "sveta_admin@gmail.com",
+        "password": "admin"
     }
 ]

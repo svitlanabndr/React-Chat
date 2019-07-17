@@ -3,12 +3,14 @@ import chatSagas from '../ChatPage/Chat/sagas';
 import loginSagas from '../LoginPage/sagas';
 import userPageSagas from '../userPage/sagas';
 import usersSagas from '../users/sagas';
+import loadingSagas from '../Loading/sagas';
 
 export default function* rootSaga() {
     yield all([
         chatSagas(),
         loginSagas(),
         userPageSagas(),
-        usersSagas()
+        usersSagas(),
+        loadingSagas()
     ])
 };
