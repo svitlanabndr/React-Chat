@@ -28,23 +28,23 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.get('/user', (req, res) => {
+app.get('/users', (req, res) => {
     res.status(200).json(users)
 });
 
-app.get('/user/:id', (req, res) => {
+app.get('/users/:id', (req, res) => {
     const user = users.find(user => user.id === req.params.id);
     res.status(200).json(user);
 });
 
-app.post('/user', (req, res) => {
+app.post('/users', (req, res) => {
     const newUser = req.body;
     users.push(newUser);
     res.status(200).json({ created: true });
 });
 
 
-app.put('/user/:id', (req, res) => {
+app.put('/users/:id', (req, res) => {
     users.forEach(user => {
         if(user.id === req.params.id)
             Object.assign(user, req.body);
@@ -52,7 +52,7 @@ app.put('/user/:id', (req, res) => {
     res.status(200).json({ updated: true });
 });
 
-app.delete('/user/:id', (req, res) => {
+app.delete('/users/:id', (req, res) => {
     users = users.filter(user => user.id !== req.params.id);
     res.status(200).json({ deleted: true });
 });

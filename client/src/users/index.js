@@ -18,17 +18,15 @@ class UserList extends Component {
 	}
 
 	onEdit(id) {
-		this.props.history.push(`/user/${id}`);
+		this.props.history.push(`/users/new/${id}`);
 	}
 
 	onDelete(id) {
 		this.props.deleteUser(id);
-		// setTimeout(this.props.fetchUsers, 1000);
-		// this.props.fetchUsers();
 	}
 
 	onAdd() {
-		this.props.history.push('/user');
+		this.props.history.push('/users/new');
 	}
 
 	render() {

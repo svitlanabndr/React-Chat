@@ -14,9 +14,9 @@ function App() {
         <Switch>
           <Route exact path='/chat' component={Chat} />
           <Route exact path="/login" component={LoginForm} />
-          <Route exact path='/' component={UserList} />
-          <Route exact path="/user" component={UserPage} />
-          <Route path="/user/:id" component={UserPage} />
+          <Route exact path='/users' component={UserList} />
+          <Route exact path="/users/new" component={UserPage} />
+          <Route path="/users/new/:id" component={UserPage} />
 			</Switch>
       </ErrorBoundary>
     </div>

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 export default class UserItem extends Component {
     render() {
         const { id, name, login, email } = this.props;
-        console.log({ id, name, login, email });
         return (
             <div className="container list-group-item">
                 <div className="row">

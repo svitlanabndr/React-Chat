@@ -38,7 +38,7 @@ class UserPage extends Component {
 
     onCancel() {
         this.setState(this.getDefaultUserData());
-        this.props.history.push('/');
+        this.props.history.push('/users');
     }
 
     onSave() {
@@ -48,7 +48,7 @@ class UserPage extends Component {
             this.props.addUser(this.state);
         }
         this.setState(this.getDefaultUserData());
-        this.props.history.push('/');
+        this.props.history.push('/users');
     }
 
     onChangeData(e, keyword) {
@@ -68,7 +68,6 @@ class UserPage extends Component {
     }
 
     getInput(data, { label, type, keyword }, index) {
-        console.log(data, { label, type, keyword }, index);
         switch (type) {
             case 'text':
                 return (
