@@ -8,18 +8,22 @@ import {
 export function* loginUser(action) {
 	const userCreds = { ...action.payload};
 	try {
-		yield call(axios.post, 'http://localhost:5000/login', userCreds);
+		const { data } = yield call(axios.post, 'http://localhost:5000/login', userCreds);
+		if (data.token) {
+			localStorage.setItem('jwt', data.token);
+		}
+		// yield put({ type: LOGIN_USER_SUCCESS })
 	} catch (error) {
 		console.log('error:', error.message);
 	}
 }
 
-function* watchAddUser() {
+function* watchloginUser() {
 	yield takeEvery(LOGIN_USER, loginUser)
 }
 
 export default function* loginSagas() {
 	yield all([
-		watchAddUser()
+		watchloginUser()
 	])
 };

@@ -1,18 +1,23 @@
 [
     {
-        "login": "sveta",
+        "id": "1",
+        "name": "Jane",
+        "login": "jane_cool_girl",
+        "email": "jane@gmail.com",
         "password": "1"
     },
     {
-        "login": "ron",
-        "password": "2"
+        "id": "2",
+        "name": "Travis",
+        "login": "__travis__",
+        "email": "super@gmail.com",
+        "password": "1"
     },
     {
-        "login": "ray",
-        "password": "3"
-    },
-    {
-        "login": "lili",
-        "password": "4"
+        "id": "3",
+        "name": "Betty",
+        "login": "your_dream",
+        "email": "betty_wow@gmail.com",
+        "password": "1"
     }
 ]
