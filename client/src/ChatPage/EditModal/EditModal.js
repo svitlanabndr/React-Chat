@@ -1,5 +1,6 @@
 import React from 'react';
 import './EditModal.css';
+import Spinner from '../../Spinner/Spinner.js';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './actions';
@@ -24,7 +25,7 @@ class Modal extends React.PureComponent {
 	}
 
 	render() {
-		if (!this.props.editValue) return <div>Waiting...</div>
+		if (!this.props.editValue) return <Spinner/>;
 		return (
 			<div className = 'modal-wrp'
 				style={{

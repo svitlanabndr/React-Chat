@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import * as actions from './actions';
 import { connect } from 'react-redux';
+import Spinner from '../Spinner/Spinner';
 
 function Loading (props) { 
 
@@ -18,7 +19,7 @@ function Loading (props) {
         if (props.response.admin) props.history.push('/users');
         if (props.response.user) props.history.push('/chat');
     }
-    return <div>Loading</div>
+    return <Spinner/>;
 }
 
 function mapStateToProps(state) {

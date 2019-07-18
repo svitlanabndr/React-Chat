@@ -10,6 +10,7 @@ import userFormConfig from '../shared/config/userFormConfig';
 import defaultUserConfig from '../shared/config/defaultUserConfig';
 import PropTypes from 'prop-types';
 import './userPage.css';
+import Spinner from "../Spinner/Spinner";
 const EMAIL = "email";
 
 class UserPage extends Component {
@@ -117,7 +118,7 @@ class UserPage extends Component {
 
     render() {
         const data = this.state;
-        if (!this.props.response) return <div>Waiting...</div>;
+        if (!this.props.response) return <Spinner/>;
         if (this.props.response.user) this.props.history.push('/chat');
         return (
             <div className="modal" style={{ display: "block" }} tabIndex="-1" role="dialog">

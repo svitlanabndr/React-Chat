@@ -5,6 +5,7 @@ import * as actions from './actions';
 import { checkUser } from '../Loading/actions';
 import PropTypes from 'prop-types';
 import './users.css';
+import Spinner from "../Spinner/Spinner";
 
 class UserList extends Component {
 	constructor(props) {
@@ -36,7 +37,7 @@ class UserList extends Component {
 	}
 
 	render() {
-		if (!this.props.response || !this.props.users) return <div>Waiting...</div>
+		if (!this.props.response || !this.props.users) return <Spinner/>;
 		if (this.props.response.user) this.props.history.push('/chat');
 	
 		return (
