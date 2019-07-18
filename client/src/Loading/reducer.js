@@ -1,4 +1,4 @@
-import { CHECK_USER_SUCCESS } from "./actionTypes";
+import { CHECK_USER_SUCCESS, CLEAR_RESPONSE } from "./actionTypes";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -10,6 +10,8 @@ export default function (state = {}, action) {
                 currentUser
             };
         }
+        case CLEAR_RESPONSE:
+            return { };
 
         default:
             return state;

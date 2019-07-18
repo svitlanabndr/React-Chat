@@ -1,2 +1,3 @@
 export const CHECK_USER = "CHECK_USER";
 export const CHECK_USER_SUCCESS = "CHECK_USER_SUCCESS";
+export const CLEAR_RESPONSE = "CLEAR_RESPONSE";

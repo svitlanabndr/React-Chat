@@ -3,7 +3,8 @@ import {
     ADD_MESSAGE, 
     UPDATE_INPUT, 
     LIKE_MESSAGE, 
-    DELETE_MESSAGE
+    DELETE_MESSAGE,
+    CLEAR_RESPONSE
 } from "./actionTypes";
 
 import { getFormattedDate, getId } from './service';

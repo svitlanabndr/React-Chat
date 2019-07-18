@@ -5,7 +5,7 @@ import MessageInput from '../MessageInput/MessageInput.js';
 import Spinner from '../../Spinner/Spinner.js';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import { checkUser } from '../../Loading/actions';
+import { checkUser, clearResponse } from '../../Loading/actions';
 import { openModal, openModalArrow } from '../EditModal/actions';
 
 class Chat extends React.Component {
@@ -21,6 +21,12 @@ class Chat extends React.Component {
     toUserList = () => {
         this.props.history.push('/users');
     }
+
+    onLogOut = () => {
+        localStorage.clear();
+        this.props.clearResponse();
+        this.props.history.push('/')
+    }
     
     render() {
         let btnUserList;
@@ -33,6 +39,7 @@ class Chat extends React.Component {
         return (
             <div className='chat' tabIndex='0' onKeyDown = { e => { if (e.key === 'ArrowUp') this.props.openModalArrow(messageList, currentUser) }}>
                 { btnUserList }
+                <button className='btn-nav right' onClick = { this.onLogOut } > Log out </button>
                 <Header/>
                 <MessageList/>
                 <MessageInput/>
@@ -51,7 +58,8 @@ const mapDispatchToProps = {
     ...actions,
     openModal,
     openModalArrow,
-    checkUser
+    checkUser,
+    clearResponse
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

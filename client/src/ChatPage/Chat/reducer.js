@@ -1,12 +1,7 @@
 import { 
     FETCH_MESSAGES_SUCCESS,
-    FETCH_MESSAGES_FAIL,
-    ADD_MESSAGE, 
-    UPDATE_INPUT, 
-    LIKE_MESSAGE, 
-    DELETE_MESSAGE, 
-    UPDATE_MESSAGE, 
-    ADD_MESSAGE_SUCCESS
+    FETCH_MESSAGES_FAIL, 
+    UPDATE_INPUT
 } from "./actionTypes";
 
 const initialState =  { 
@@ -17,7 +12,6 @@ const initialState =  {
 };
 
 export default function (state = initialState, action) {
-    let newMessageList = [];
     switch (action.type) {
         
         case FETCH_MESSAGES_SUCCESS:
@@ -40,28 +34,6 @@ export default function (state = initialState, action) {
                 ...state,
                 inputValue: action.payload.inputValue
             };
-
-        // case LIKE_MESSAGE:
-        //     newMessageList = state.messageList.map(obj => {
-        //         if(obj.id === action.payload.id)
-        //             obj.is_liked = !obj.is_liked;
-        //         return obj;
-        //     });
-        //     return {
-        //         ...state,
-        //         messageList: newMessageList
-        //     }
-        
-        // case UPDATE_MESSAGE:
-        //     newMessageList = state.messageList.map(obj => {
-        //         if (obj.id === action.payload.id)
-        //             obj.message = action.payload.newMessage;
-        //         return obj;
-        //     });
-        //     return {
-        //         ...state,
-        //         messageList: newMessageList
-        //     }
 
         default:
             return state;

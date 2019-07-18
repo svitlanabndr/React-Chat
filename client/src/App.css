@@ -32,6 +32,10 @@
   border-radius: 3px;
 }
 
+.right {
+  float: right;
+}
+
 .btn-nav:hover {
   background-color: steelblue;
   color: white;
