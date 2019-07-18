@@ -4,7 +4,7 @@ import {
     UPDATE_INPUT, 
     LIKE_MESSAGE, 
     DELETE_MESSAGE,
-    CLEAR_RESPONSE
+    CLEAR_INPUT
 } from "./actionTypes";
 
 import { getFormattedDate, getId } from './service';
@@ -41,4 +41,8 @@ export const likeMessage = id => ({
 export const deleteMessage = id => ({
     type: DELETE_MESSAGE,
     payload: { id }
+});
+
+export const clearInput = () => ({
+    type: CLEAR_INPUT
 });

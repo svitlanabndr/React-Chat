@@ -4,7 +4,8 @@ import {
 	FETCH_MESSAGES, 
 	ADD_MESSAGE,
 	DELETE_MESSAGE,
-	LIKE_MESSAGE
+	LIKE_MESSAGE,
+	CLEAR_INPUT
 } from "./actionTypes";
 
 export function* fetchMessages() {
@@ -25,6 +26,7 @@ export function* addMessage(action) {
 	try {
 		yield call(axios.post, 'http://localhost:5000/chat', newMessage);
 		yield put({ type: FETCH_MESSAGES });
+		yield put({ type: CLEAR_INPUT });
 	} catch (error) {
 		console.log('createMessage error:', error.message);
 	}

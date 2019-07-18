@@ -1,7 +1,8 @@
 import { 
     FETCH_MESSAGES_SUCCESS,
     FETCH_MESSAGES_FAIL, 
-    UPDATE_INPUT
+    UPDATE_INPUT,
+    CLEAR_INPUT
 } from "./actionTypes";
 
 const initialState =  { 
@@ -19,7 +20,6 @@ export default function (state = initialState, action) {
                 ...state, 
                 messageList: action.payload.messageList, 
                 isFetching: action.payload.isFetching,
-                inputValue: ''
             }
 
         case FETCH_MESSAGES_FAIL:
@@ -33,6 +33,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 inputValue: action.payload.inputValue
+            };
+
+        case CLEAR_INPUT:
+            return {
+                ...state,
+                inputValue: ''
             };
 
         default:
