@@ -15,7 +15,7 @@ class MessageInput extends React.PureComponent {
                     onChange={ (evt) => this.props.updateInput(evt.target.value) }  
                     placeholder="Type a message"
                  />
-                <button className="msg_send_btn" type="button" onClick = { this.props.addMessage }><LogoPlane /></button>
+                <button className="msg_send_btn" type="button" onClick = { () => this.props.addMessage(this.props.currentUser, this.props.inputValue) }><LogoPlane /></button>
                 </div>
             </div>
         );
@@ -27,7 +27,10 @@ MessageInput.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return { inputValue: state.chat.inputValue };
+    return { 
+        inputValue: state.chat.inputValue,
+        currentUser: state.loading.currentUser
+    };
 }
 
 const mapDispatchToProps = {

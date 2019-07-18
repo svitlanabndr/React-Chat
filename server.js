@@ -14,9 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
-    console.log(req.body);
     const verified = jwt.verify(req.body.jwt, 'secret');
-    console.log(verified);
     if (!verified) res.status(401).json({ auth: false });
     const user = users.find(user => user.login === verified.login);
     user.login === 'admin' && user.password === 'admin' ?
@@ -25,6 +23,11 @@ app.post('/', (req, res) => {
 });
 
 app.get('/chat', (req, res) => {
+    res.send(messages);
+});
+
+app.post('/chat', (req, res) => {
+    messages.push(req.body);
     res.send(messages);
 });
 

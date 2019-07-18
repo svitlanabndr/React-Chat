@@ -16,7 +16,7 @@ class MessageList extends React.Component {
             if (message.break_date) {
                 return <p className = 'break-line' key = { i }>{ message.break_date }</p>
             } else {
-                return message.is_mine ? 
+                return message.user === this.props.currentUser.id ? 
                     <OutgoingMessage message = { message } key = { message.id }/> : 
                     <IncomingMessage message = { message } key = { message.id }/>
             }
@@ -36,7 +36,8 @@ MessageList.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        data: makeMessageListProps(state.chat.messageList)
+        data: makeMessageListProps(state.chat.messageList),
+        currentUser: state.loading.currentUser
     }
 }
 

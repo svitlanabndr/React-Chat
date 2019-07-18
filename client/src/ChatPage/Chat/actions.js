@@ -13,15 +13,15 @@ export const fetchMessages = () => ({
     type: FETCH_MESSAGES
 });
 
-export const addMessage = () => ({
+export const addMessage = (user, text) => ({
     type: ADD_MESSAGE,
     payload: {
         newMessage: {
             id:  getId(),
-            user: "Sveta",
-            avatar: "https://i.pravatar.cc/300?img=14",
+            user: user.id,
+            avatar: user.avatar,
+            message: text,
             created_at:  getFormattedDate(),
-            is_mine: true,
             is_liked: false,
             marked_read: false
         } 

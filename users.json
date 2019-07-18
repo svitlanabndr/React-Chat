@@ -3,6 +3,7 @@
         "id": "1",
         "name": "Jane",
         "login": "jane_cool_girl",
+        "avatar": "https://i.pravatar.cc/300?img=5",
         "email": "jane@gmail.com",
         "password": "1"
     },
@@ -10,6 +11,7 @@
         "id": "2",
         "name": "Travis",
         "login": "__travis__",
+        "avatar": "https://i.pravatar.cc/300?img=14",
         "email": "super@gmail.com",
         "password": "1"
     },
@@ -24,6 +26,7 @@
         "id": "4",
         "name": "Sveta",
         "login": "admin",
+        "avatar": "https://i.pravatar.cc/300?img=12",
         "email": "sveta_admin@gmail.com",
         "password": "admin"
     }

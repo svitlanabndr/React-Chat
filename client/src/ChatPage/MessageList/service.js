@@ -11,10 +11,10 @@ export const makeMessageListProps = (data) => {
         const currentMessage = {
             id: object.id,
             avatar: object.avatar,
+            user: object.user,
             created_at: object.created_at,
             message: object.message,
             is_liked: object.is_liked,
-            is_mine: object.user === 'Sveta'
         }
         props.push(currentMessage);
     });
