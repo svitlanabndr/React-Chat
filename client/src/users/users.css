@@ -5,6 +5,7 @@
     overflow-y: auto;
     margin: 40px auto 0 auto;
     border: 1px solid gray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .list-group-item {
@@ -20,7 +21,8 @@
     width: 20%;
 }
 
-.btn-group .btn{
+.btn-group .btn,
+.btn-success {
     height: 40px;
     border: 0;
     font-size: 1.5em;
@@ -35,11 +37,13 @@
     background-color: rgb(124, 29, 29);
     color: white;
 }
-.btn-primary {
+.btn-primary,
+.btn-success {
     color: #05728f;
     background: transparent;
 }
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-success:hover {
     color: white;
     background: #05728f;
 }

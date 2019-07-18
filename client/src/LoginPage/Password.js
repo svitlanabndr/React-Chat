@@ -8,9 +8,10 @@ const Password = ({ passwordValue, updatePasswordValue }) => {
     const inputType = isShown ? 'text' : 'password';
 
     return (
-        <div>
+        <div className='form-group'>
             <label> Your password: </label>
             <input
+                className='password'
                 type={ inputType }
                 value={passwordValue} 
                 onChange={ (evt) => updatePasswordValue(evt.target.value) }

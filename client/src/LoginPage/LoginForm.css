@@ -1,0 +1,13 @@
+.login-form {
+    padding: 30px 15px 0 25px;
+    width: 40%;
+    height: 250px;
+    margin: 40px auto 0 auto;
+    border: 1px solid gray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.login {
+    display: block;
+    width: 100%;
+}

@@ -36,37 +36,44 @@ class UserList extends Component {
 		this.props.history.push('/users/new');
 	}
 
+	toChat = () => {
+		this.props.history.push('/chat');
+	}
+
 	render() {
 		if (!this.props.response || !this.props.users) return <Spinner/>;
 		if (this.props.response.user) this.props.history.push('/chat');
 	
 		return (
-			<div className="user-list">
-				<div className="list-group col-10">
-					{
-						this.props.users.map(user => {
-							return (
-								<UserItem
-									key={user.id}
-									id={user.id}
-									name={user.name}
-									login={user.login}
-									email={user.email}
-									onEdit={this.onEdit}
-									onDelete={this.onDelete}
-								/>
-							);
-						})
-					}
-				</div>
-				<div className="footer">
-					<button
-						className="btn btn-success"
-						onClick={this.onAdd}
-						style={{ margin: "5px" }}
-					>
-						Add user
-					</button>
+			<div>
+				<button className='btn-nav' onClick = {this.toChat}> Chat </button>
+				<div className="user-list">
+					<div className="list-group col-10">
+						{
+							this.props.users.map(user => {
+								return (
+									<UserItem
+										key={user.id}
+										id={user.id}
+										name={user.name}
+										login={user.login}
+										email={user.email}
+										onEdit={this.onEdit}
+										onDelete={this.onDelete}
+									/>
+								);
+							})
+						}
+					</div>
+					<div className="footer">
+						<button
+							className="btn btn-success"
+							onClick={this.onAdd}
+							style={{ margin: "5px" }}
+						>
+							Add user
+						</button>
+					</div>
 				</div>
 			</div>
 		);

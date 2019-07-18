@@ -17,16 +17,22 @@ class Chat extends React.Component {
             this.props.history.push('/login');
 		this.props.fetchMessages();
     }
+
+    toUserList = () => {
+        this.props.history.push('/users');
+    }
     
     render() {
+        let btnUserList;
         const { isFetching, error, isModalOpen, editId, messageList, currentUser } = this.props;
         if (!this.props.response || isFetching) return <Spinner />;
         if (error) return <div>Error: {error.message}</div>;
         if (isModalOpen) this.props.history.push(`/chat/${editId}`);
-
-//  if response if admin - button
+        if (this.props.response && this.props.response.admin) btnUserList = <button className='btn-nav' onClick = { this.toUserList }> User List </button>
+        
         return (
-            <div tabIndex='0' onKeyDown = { e => { if (e.key === 'ArrowUp') this.props.openModalArrow(messageList, currentUser) }}>
+            <div className='chat' tabIndex='0' onKeyDown = { e => { if (e.key === 'ArrowUp') this.props.openModalArrow(messageList, currentUser) }}>
+                { btnUserList }
                 <Header/>
                 <MessageList/>
                 <MessageInput/>

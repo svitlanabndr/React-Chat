@@ -5,9 +5,10 @@ import { updateLoginValue } from './actions';
 
 const Login = ({ loginValue, updateLoginValue }) => {
     return (
-        <div>
+        <div className='form-group'>
             <label> Your login: </label>
             <input
+                className='login'
                 type='text'
                 value={loginValue} 
                 onChange={ (evt) => updateLoginValue(evt.target.value) }

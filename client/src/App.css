@@ -23,6 +23,24 @@
   color: #61dafb;
 }
 
+.btn-nav {
+  background-color: transparent;
+  border: 0;
+  font-size: 1.5em;
+  color: steelblue;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+.btn-nav:hover {
+  background-color: steelblue;
+  color: white;
+}
+
+* {
+  outline: 0;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

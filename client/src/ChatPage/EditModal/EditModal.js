@@ -31,17 +31,18 @@ class Modal extends React.PureComponent {
 				style={{
 					display: this.props.isModalOpen ? "block" : "none"
 				}}>
-				<div className='modal'>
+				<div className='modal my-modal'>
 					<input 
+						className="edit-input"
 						type="text" 
 						value={ this.props.editValue } 
 						onChange={ evt => this.props.updateEdit(evt.target.value) } 
 					/>
-					<button className = 'edit-btn' onClick={ () => {
+					<button className = 'btn btn-primary' onClick={ () => {
 						this.props.updateMessage(this.props.editId, this.props.editValue);
 						this.onClose();
 					}}> Edit </button>
-					<button className = 'cancel-btn' onClick={ this.onClose }> Cancel </button>
+					<button className = 'btn btn-secondary' onClick={ this.onClose }> Cancel </button>
 				</div>
 			</div>
 		);

@@ -9,7 +9,6 @@
 }
 
 .modal {
-    height: 150px;
     position: relative;
     width: 500px;
     padding: 20px;
@@ -20,6 +19,10 @@
     z-index: 2;
     text-align: left;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+.my-modal {
+    height: 150px;
 }
 
 .overlay {
@@ -38,25 +41,43 @@
     margin-bottom: 20px
 }
 
-.edit-btn,
-.cancel-btn {
-    background-color: #408cec;
+.btn{
+    height: 40px;
     border: 0;
-    padding: 12px 20px;
-    color: #fff;
-    margin: 0 auto;
-    width: 150;
-    display: block;
-    border-radius: 3;
-    margin: 0;
-    width: auto;
-    margin-top: 10;
-    float: left;
+    font-size: 1.5em;
+    border-radius: 2px;
+}
+.btn-secondary {
+    float: right;
+    color:  rgb(179, 179, 179);
+    background: transparent;
 }
 
-.cancel-btn {
-    background-color: #9fa0a1;
-    color: rgb(53, 53, 53);
-    display: inline;
-    margin-left: 10px;
+.btn-secondary:hover {
+    background-color: rgb(179, 179, 179);
+    color: white;
+}
+.btn-primary {
+    color: #05728f;
+    background: transparent;
+}
+.btn-primary:hover {
+    color: white;
+    background: #05728f;
+}
+
+.edit-input {
+    font-size: 1.5em;
+    padding: 2px;
+    border: 3px solid rgb(179, 179, 179);
+    box-sizing: border-box;
+    color: rgb(48, 47, 47);
+
+}
+
+.edit-input:focus,
+.edit-input:hover {
+    border: 3px solid #05728f;
+    box-sizing: border-box;
+    color: black;
 }

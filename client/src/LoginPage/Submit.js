@@ -4,7 +4,7 @@ import { loginUser } from './actions';
 
 const Submit = ({passwordValue, loginValue, loginUser}) => {
     return (
-        <button onClick = {() => {loginUser(loginValue, passwordValue)}} > Sign In </button>
+        <button className="btn btn-primary" onClick = {() => {loginUser(loginValue, passwordValue)}} > Sign In </button>
     );
 }
 

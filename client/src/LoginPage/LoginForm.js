@@ -3,7 +3,7 @@ import Login from './Login';
 import Password from './Password';
 import Submit from './Submit';
 import { connect } from 'react-redux';
-
+import './LoginForm.css';
 
 class LoginForm extends React.Component {
     render() {
@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
         }
         
         return (
-            <div>
+            <div className='login-form'>
                 <Login/>
                 <Password/>
                 <Submit/>
