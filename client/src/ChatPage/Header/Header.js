@@ -3,15 +3,13 @@ import './Header.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class Header extends React.PureComponent {
-    render() {
-        return <div className = 'header'>
-            <span className = 'title'>React Chat</span>
-            <span className = 'participants'>{this.props.usersAmount} participants</span>
-            <span className = 'messages'>{this.props.messagesAmount} messages</span>
-            <span className = 'date'>last message at {this.props.lastMessageTime}</span>
-        </div>
-    }
+function Header (props) {
+    return <div className = 'header'>
+        <span className = 'title'>React Chat</span>
+        <span className = 'participants'>{props.usersAmount} participants</span>
+        <span className = 'messages'>{props.messagesAmount} messages</span>
+        <span className = 'date'>last message at {props.lastMessageTime}</span>
+    </div>
 }
 
 Header.propTypes = {

@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as actions from './actions';
 import { connect } from 'react-redux';
 
-class Loading extends React.Component { 
-    componentDidMount() {
+function Loading (props) { 
+
+    useEffect(() => {
         const jwt = localStorage.getItem('jwt');
-        jwt ?
-            this.props.checkUser(jwt) :
-            this.props.history.push('/login');
-    }
-
-    render() {
-        if (this.props.response) {
-            if (this.props.response.admin) this.props.history.push('/users');
-            if (this.props.response.user) this.props.history.push('/chat');
+        if (jwt)
+            props.checkUser(jwt);
+        else {
+            props.history.push('/login');
+            return;
         }
+    });
 
-        return <div>Loading</div>
+    if (props.response) {
+        if (props.response.admin) props.history.push('/users');
+        if (props.response.user) props.history.push('/chat');
     }
+    return <div>Loading</div>
 }
 
 function mapStateToProps(state) {
