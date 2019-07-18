@@ -36,6 +36,14 @@ app.delete('/chat/:id', (req, res) => {
     res.status(200).json({ deleted: true });
 });
 
+app.post('/chat/like/:id', (req, res) => {
+    messages = messages.map(message => {
+        if (message.id === req.params.id) message.is_liked = !message.is_liked;
+        return message;
+    });
+    res.status(200).json({ liked: true });
+});
+
 app.post('/login', (req, res) => {
     const userFromReq = req.body;
     const userInDB = users.find(user => user.login === userFromReq.login);
