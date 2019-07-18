@@ -31,6 +31,19 @@ app.post('/chat', (req, res) => {
     res.send(messages);
 });
 
+app.get('/chat/:id', (req, res) => {
+    res.send(messages.find(message => message.id === req.params.id));
+});
+
+app.post('/chat/:id', (req, res) => {
+    const newText = req.body.value;
+    messages = messages.map(message => {
+        if (message.id === req.params.id) message.message = newText;
+        return message;
+    });
+    res.status(200).json({ updated: true });
+});
+
 app.delete('/chat/:id', (req, res) => {
     messages = messages.filter(message => message.id !== req.params.id);
     res.status(200).json({ deleted: true });

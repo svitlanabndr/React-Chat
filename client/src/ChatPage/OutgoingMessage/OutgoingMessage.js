@@ -20,7 +20,7 @@ class OutgoingMessage extends React.Component {
                     <p>{ message.message }</p>
                     <span className="time_date">{ message.created_at }</span> 
                     <button type="button" className='delete-btn' onClick={ () => this.props.deleteMessage(message.id) }>< DeleteLogo /></button>      
-                    <button type="button" className='edit-btn' onClick={ () => this.props.openModal(message.id, message.message) }>< EditLogo /></button>
+                    <button type="button" className='edit-btn' onClick={ () => this.props.openModal(message.id) }>< EditLogo /></button>
                 </div>
             </div>
         );

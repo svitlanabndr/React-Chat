@@ -3,18 +3,33 @@ import './EditModal.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import { updateMessage } from '../Chat/actions';
+import { checkUser } from '../../Loading/actions';
 
 class Modal extends React.PureComponent {
+	componentDidMount() {
+		const jwt = localStorage.getItem('jwt');
+        if (jwt)
+            this.props.checkUser(jwt);
+        else
+            this.props.history.push('/login');
+
+        if (this.props.match.params.id) {
+            this.props.fetchMessage(this.props.match.params.id)
+        }
+	}
+
+	onClose = () => {
+		this.props.closeModal();
+		this.props.history.push('/chat');
+	}
+
 	render() {
+		if (!this.props.editValue) return <div>Waiting...</div>
 		return (
 			<div className = 'modal-wrp'
 				style={{
 					display: this.props.isModalOpen ? "block" : "none"
 				}}>
-				
-				<div className = 'overlay' 
-					onClick={ this.props.closeModal }/>
 				<div className='modal'>
 					<input 
 						type="text" 
@@ -23,9 +38,9 @@ class Modal extends React.PureComponent {
 					/>
 					<button className = 'edit-btn' onClick={ () => {
 						this.props.updateMessage(this.props.editId, this.props.editValue);
-						this.props.closeModal()
+						this.onClose();
 					}}> Edit </button>
-					<button className = 'cancel-btn' onClick={ this.props.closeModal }> Cancel </button>
+					<button className = 'cancel-btn' onClick={ this.onClose }> Cancel </button>
 				</div>
 			</div>
 		);
@@ -48,7 +63,7 @@ function mapStateToProps(state, ownProps) {
 
 const mapDispatchToProps = {
 	...actions,
-	updateMessage
+	checkUser
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal)
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

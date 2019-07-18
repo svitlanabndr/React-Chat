@@ -3,8 +3,7 @@ import {
     ADD_MESSAGE, 
     UPDATE_INPUT, 
     LIKE_MESSAGE, 
-    DELETE_MESSAGE, 
-    UPDATE_MESSAGE 
+    DELETE_MESSAGE
 } from "./actionTypes";
 
 import { getFormattedDate, getId } from './service';
@@ -41,12 +40,4 @@ export const likeMessage = id => ({
 export const deleteMessage = id => ({
     type: DELETE_MESSAGE,
     payload: { id }
-});
-
-export const updateMessage = (id, newMessage) => ({
-    type: UPDATE_MESSAGE,
-    payload: {
-        id,
-        newMessage
-    }
 });
