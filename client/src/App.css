@@ -32,6 +32,15 @@
   border-radius: 3px;
 }
 
+.unclickable {
+  background-color: rgb(172, 172, 172);
+  border: 0;
+  font-size: 1.5em;
+  color: white;
+  margin: 10px;
+  border-radius: 3px;
+}
+
 .right {
   float: right;
 }

@@ -29,7 +29,7 @@ class Chat extends React.Component {
     }
     
     render() {
-        let btnUserList;
+        let btnUserList = <button className='unclickable'> User List </button>;
         const { isFetching, error, isModalOpen, editId, messageList, currentUser } = this.props;
         if (!this.props.response || isFetching) return <Spinner />;
         if (error) return <div>Error: {error.message}</div>;
