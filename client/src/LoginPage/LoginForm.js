@@ -2,9 +2,16 @@ import React from 'react';
 import Login from './Login';
 import Password from './Password';
 import Submit from './Submit';
+import { connect } from 'react-redux';
 
-export default class LoginForm extends React.Component {
+
+class LoginForm extends React.Component {
     render() {
+        if (this.props.response) {
+            if (this.props.response.admin) this.props.history.push('/users');
+            if (this.props.response.user) this.props.history.push('/chat');
+        }
+        
         return (
             <div>
                 <Login/>
@@ -14,3 +21,9 @@ export default class LoginForm extends React.Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return { ...state.loading };
+}
+
+export default connect(mapStateToProps)(LoginForm);

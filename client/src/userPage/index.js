@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 import * as actions from './actions';
 import { addUser, updateUser } from '../users/actions';
+import { checkUser } from '../Loading/actions';
 import TextInput from '../shared/inputs/text/TextInput';
 import PasswordInput from '../shared/inputs/password/PasswordInput';
 import EmailInput from '../shared/inputs/email/EmailInput';
@@ -21,6 +22,12 @@ class UserPage extends Component {
     }
 
     componentDidMount() {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt)
+            this.props.checkUser(jwt);
+        else
+            this.props.history.push('/login');
+
         if (this.props.match.params.id) {
             this.props.fetchUser(this.props.match.params.id)
         }
@@ -110,6 +117,8 @@ class UserPage extends Component {
 
     render() {
         const data = this.state;
+        if (!this.props.response) return <div>Waiting...</div>;
+        if (this.props.response.user) this.props.history.push('/chat');
         return (
             <div className="modal" style={{ display: "block" }} tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
@@ -142,14 +151,16 @@ UserPage.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        userData: state.userPage.userData
+        userData: state.userPage.userData,
+        ...state.loading
     }
 };
 
 const mapDispatchToProps = {
     ...actions,
     addUser,
-    updateUser
+    updateUser,
+    checkUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

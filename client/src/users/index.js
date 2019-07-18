@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import UserItem from './UserItem';
 import * as actions from './actions';
+import { checkUser } from '../Loading/actions';
 import PropTypes from 'prop-types';
 import './users.css';
 
@@ -14,8 +15,13 @@ class UserList extends Component {
 	}
 
 	componentDidMount() {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) 
+			this.props.checkUser(jwt);
+		else
+            this.props.history.push('/login');
 		this.props.fetchUsers();
-	}
+    }
 
 	onEdit(id) {
 		this.props.history.push(`/users/new/${id}`);
@@ -30,6 +36,9 @@ class UserList extends Component {
 	}
 
 	render() {
+		if (!this.props.response || !this.props.users) return <div>Waiting...</div>
+		if (this.props.response.user) this.props.history.push('/chat');
+	
 		return (
 			<div className="user-list">
 				<div className="list-group col-10">
@@ -69,12 +78,14 @@ UserList.propTypes = {
 
 const mapStateToProps = (state) => {
 	return {
-		users: state.users
+		users: state.users,
+		...state.loading
 	}
 };
 
 const mapDispatchToProps = {
-	...actions
+	...actions,
+	checkUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);

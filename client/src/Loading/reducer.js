@@ -5,7 +5,7 @@ export default function (state = {}, action) {
         case CHECK_USER_SUCCESS: {
             return {
                 ...state,
-                ...action.payload.data
+                response: action.payload.data
             };
         }
 

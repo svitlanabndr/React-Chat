@@ -11,10 +11,9 @@ class Loading extends React.Component {
     }
 
     render() {
-        if (this.props.admin) {
-            this.props.history.push('/users');
-        } else if (this.props.user) {
-            this.props.history.push('/chat');
+        if (this.props.response) {
+            if (this.props.response.admin) this.props.history.push('/users');
+            if (this.props.response.user) this.props.history.push('/chat');
         }
 
         return <div>Loading</div>
