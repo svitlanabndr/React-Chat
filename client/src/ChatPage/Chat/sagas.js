@@ -2,7 +2,8 @@ import axios from 'axios';
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import { 
 	FETCH_MESSAGES, 
-	ADD_MESSAGE
+	ADD_MESSAGE,
+	DELETE_MESSAGE
 } from "./actionTypes";
 
 export function* fetchMessages() {
@@ -33,9 +34,23 @@ function* watchAddMessage() {
 	yield takeEvery(ADD_MESSAGE, addMessage)
 }
 
+export function* deleteMessage(action) {
+	try {
+		yield call(axios.delete, `http://localhost:5000/chat/${action.payload.id}`);
+		yield put({ type: FETCH_MESSAGES });
+	} catch (error) {
+		console.log('deleteMessage Error:', error.message);
+	}
+}
+
+function* watchDeleteMessage() {
+	yield takeEvery(DELETE_MESSAGE, deleteMessage)
+}
+
 export default function* chatSagas() {
 	yield all([
 		watchFetchMessages(),
-		watchAddMessage()
+		watchAddMessage(),
+		watchDeleteMessage()
 	])
 };

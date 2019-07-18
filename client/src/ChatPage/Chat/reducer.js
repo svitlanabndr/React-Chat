@@ -51,13 +51,6 @@ export default function (state = initialState, action) {
         //         ...state,
         //         messageList: newMessageList
         //     }
-
-        // case DELETE_MESSAGE:
-        //     newMessageList = state.messageList.filter(obj => obj.id !== action.payload.id);
-        //     return {
-        //         ...state,
-        //         messageList: newMessageList
-        //     }
         
         // case UPDATE_MESSAGE:
         //     newMessageList = state.messageList.map(obj => {

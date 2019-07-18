@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const messages = require('./messages.json');
+let messages = require('./messages.json');
 let users = require('./users.json');
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -29,6 +29,11 @@ app.get('/chat', (req, res) => {
 app.post('/chat', (req, res) => {
     messages.push(req.body);
     res.send(messages);
+});
+
+app.delete('/chat/:id', (req, res) => {
+    messages = messages.filter(message => message.id !== req.params.id);
+    res.status(200).json({ deleted: true });
 });
 
 app.post('/login', (req, res) => {
