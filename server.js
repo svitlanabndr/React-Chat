@@ -5,8 +5,10 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-let messages = require('./messages.json');
 let users = require('./users.json');
+const chatRouter = require('./routers/chatRouter');
+const usersRouter = require('./routers/usersRouter');
+const loginRouter = require('./routers/loginRouter');
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(cors());
@@ -22,77 +24,6 @@ app.post('/', (req, res) => {
         res.status(200).json({ auth: true, user });    
 });
 
-app.get('/chat', (req, res) => {
-    res.send(messages);
-});
-
-app.post('/chat', (req, res) => {
-    messages.push(req.body);
-    res.send(messages);
-});
-
-app.get('/chat/:id', (req, res) => {
-    res.send(messages.find(message => message.id === req.params.id));
-});
-
-app.post('/chat/:id', (req, res) => {
-    const newText = req.body.value;
-    messages = messages.map(message => {
-        if (message.id === req.params.id) message.message = newText;
-        return message;
-    });
-    res.status(200).json({ updated: true });
-});
-
-app.delete('/chat/:id', (req, res) => {
-    messages = messages.filter(message => message.id !== req.params.id);
-    res.status(200).json({ deleted: true });
-});
-
-app.post('/chat/like/:id', (req, res) => {
-    messages = messages.map(message => {
-        if (message.id === req.params.id) message.is_liked = !message.is_liked;
-        return message;
-    });
-    res.status(200).json({ liked: true });
-});
-
-app.post('/login', (req, res) => {
-    const userFromReq = req.body;
-    const userInDB = users.find(user => user.login === userFromReq.login);
-    if (userInDB && userInDB.password === userFromReq.password) {
-        const token = jwt.sign(userFromReq, 'secret');
-        res.status(200).json({ auth: true, token });
-    } else {
-        res.status(401).json({ auth: false });
-    }
-});
-
-app.get('/users', (req, res) => {
-    res.status(200).json(users)
-});
-
-app.get('/users/:id', (req, res) => {
-    const user = users.find(user => user.id === req.params.id);
-    res.status(200).json(user);
-});
-
-app.post('/users', (req, res) => {
-    const newUser = req.body;
-    users.push(newUser);
-    res.status(200).json({ created: true });
-});
-
-
-app.put('/users/:id', (req, res) => {
-    users.forEach(user => {
-        if(user.id === req.params.id)
-            Object.assign(user, req.body);
-    });
-    res.status(200).json({ updated: true });
-});
-
-app.delete('/users/:id', (req, res) => {
-    users = users.filter(user => user.id !== req.params.id);
-    res.status(200).json({ deleted: true });
-});
+app.use('/chat', chatRouter);
+app.use('/users', usersRouter);
+app.use('/login', loginRouter);
