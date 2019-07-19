@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { call, put, takeEvery, all } from 'redux-saga/effects';
-import { ADD_USER, UPDATE_USER, DELETE_USER, FETCH_USERS } from "./actionTypes";
+import { ADD_USER, UPDATE_USER, DELETE_USER, FETCH_USERS, FETCH_USERS_SUCCESS, USERS_FAIL } from "./actionTypes";
 
 export function* fetchUsers() {
 	try {
 		const response = yield call(axios.get, 'http://localhost:5000/users');
-		yield put({ type: 'FETCH_USERS_SUCCESS', payload: { users: response.data } })
+		yield put({ type: FETCH_USERS_SUCCESS, payload: { users: response.data } })
 	} catch (error) {
-		console.log('fetchUsers error:', error.message)
+		yield put({ type: USERS_FAIL, payload: { error } })
 	}
 }
 
@@ -22,7 +22,7 @@ export function* addUser(action) {
 		yield call(axios.post, 'http://localhost:5000/users', newUser);
 		yield put({ type: FETCH_USERS });
 	} catch (error) {
-		console.log('createUser error:', error.message);
+		yield put({ type: USERS_FAIL, payload: { error } })
 	}
 }
 
@@ -38,7 +38,7 @@ export function* updateUser(action) {
 		yield call(axios.put, `http://localhost:5000/users/${id}`, updatedUser);
 		yield put({ type: FETCH_USERS });
 	} catch (error) {
-		console.log('updateUser error:', error.message);
+		yield put({ type: USERS_FAIL, payload: { error } })
 	}
 }
 
@@ -52,7 +52,7 @@ export function* deleteUser(action) {
 		yield call(axios.delete, `http://localhost:5000/users/${action.payload.id}`);
 		yield put({ type: FETCH_USERS });
 	} catch (error) {
-		console.log('deleteUser Error:', error.message);
+		yield put({ type: USERS_FAIL, payload: { error } })
 	}
 }
 

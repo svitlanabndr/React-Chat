@@ -2,7 +2,8 @@ import {
     FETCH_MESSAGES_SUCCESS,
     FETCH_MESSAGES_FAIL, 
     UPDATE_INPUT,
-    CLEAR_INPUT
+    CLEAR_INPUT,
+    CHAT_FAIL
 } from "./actionTypes";
 
 const initialState =  { 
@@ -10,6 +11,7 @@ const initialState =  {
     isFetching: true, 
     error: null, 
     inputValue: '',
+    chatError: null
 };
 
 export default function (state = initialState, action) {
@@ -20,6 +22,7 @@ export default function (state = initialState, action) {
                 ...state, 
                 messageList: action.payload.messageList, 
                 isFetching: action.payload.isFetching,
+                chatError: null
             }
 
         case FETCH_MESSAGES_FAIL:
@@ -39,6 +42,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 inputValue: ''
+            };
+
+        case CHAT_FAIL:
+            return {
+                ...state,
+                chatError: action.payload.error
             };
 
         default:

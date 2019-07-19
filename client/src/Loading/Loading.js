@@ -15,6 +15,8 @@ function Loading (props) {
         }
     });
 
+    if (props.checkError) return <div>{props.checkError.message}</div>;
+
     if (props.response) {
         if (props.response.admin) props.history.push('/users');
         if (props.response.user) props.history.push('/chat');

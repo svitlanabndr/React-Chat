@@ -1,11 +1,13 @@
 import { 
     UPDATE_LOGIN_VALUE,
-    UPDATE_PASSWORD_VALUE
+    UPDATE_PASSWORD_VALUE,
+    LOGIN_USER_FAIL
 } from "./actionTypes";
 
 const initialState =  { 
     loginValue: '',
-    passwordValue: ''
+    passwordValue: '',
+    error: undefined
 };
 
 export default function (state = initialState, action) {
@@ -22,6 +24,12 @@ export default function (state = initialState, action) {
                 ...state,
                 passwordValue: action.payload.passwordValue
             };
+
+        case LOGIN_USER_FAIL:
+            return { 
+                ...state, 
+                error: action.payload.error, 
+            }
 
         default:
             return state;

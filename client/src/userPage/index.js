@@ -117,6 +117,8 @@ class UserPage extends Component {
     }
 
     render() {
+        let error;
+        if(this.props.usersError) error = <div className='chat-error'>{this.props.usersError.message}</div>;
         const data = this.state;
         if (!this.props.response) return <Spinner/>;
         if (this.props.response.user) this.props.history.push('/chat');
@@ -134,6 +136,7 @@ class UserPage extends Component {
                             {
                                 userFormConfig.map((item, index) => this.getInput(data, item, index))
                             }
+                            {error}
                         </div>
                         <div className="modal-footer">
                             <button className="btn btn-secondary" onClick={this.onCancel}>Cancel</button>
@@ -153,6 +156,7 @@ UserPage.propTypes = {
 const mapStateToProps = (state) => {
     return {
         userData: state.userPage.userData,
+        usersError: state.users.usersError,
         ...state.loading
     }
 };

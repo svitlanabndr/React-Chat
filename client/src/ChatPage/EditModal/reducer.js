@@ -3,13 +3,15 @@ import {
     OPEN_MODAL_ARROW, 
     UPDATE_EDIT, 
     CLOSE_MODAL, 
-    FETCH_MESSAGE_SUCCESS
+    FETCH_MESSAGE_SUCCESS,
+    EDIT_MODAL_FAIL
 } from "./actionTypes";
 
 const initialState =  { 
     isModalOpen: false, 
     editValue: undefined,
     editId: undefined,
+    editError: null
 };
 
 export default function (state = initialState, action) {
@@ -19,7 +21,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isModalOpen: true,
-                editId: action.payload.id
+                editId: action.payload.id,
+                editError: null
             };
 
         case OPEN_MODAL_ARROW:
@@ -35,7 +38,8 @@ export default function (state = initialState, action) {
         case FETCH_MESSAGE_SUCCESS:
             return {
                 ...state,
-                editValue: action.payload.message
+                editValue: action.payload.message,
+                editError: null
             };
 
         case UPDATE_EDIT:
@@ -51,6 +55,12 @@ export default function (state = initialState, action) {
                 editValue: undefined,
                 editId: undefined
             };
+        
+        case EDIT_MODAL_FAIL:
+            return {
+                ...state,
+                editError: action.payload.error
+            }
 
         default:
             return state;

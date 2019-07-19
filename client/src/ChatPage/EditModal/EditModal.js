@@ -25,6 +25,14 @@ class Modal extends React.PureComponent {
 	}
 
 	render() {
+		if (this.props.editError) {
+			return (
+				<div>
+					<div className='chat-error'>Error: {this.props.editError.message} </div>
+					<button className = 'btn btn-secondary' onClick={ this.onClose }> Back to chat </button>
+				</div>
+			);
+		}
 		if (!this.props.editValue) return <Spinner/>;
 		return (
 			<div className = 'modal-wrp'
@@ -60,6 +68,7 @@ function mapStateToProps(state, ownProps) {
 		isModalOpen: state.editModal.isModalOpen,
 		editId: state.editModal.editId,
 		editValue: state.editModal.editValue,
+		editError: state.editModal.editError
 	 };
 }
 

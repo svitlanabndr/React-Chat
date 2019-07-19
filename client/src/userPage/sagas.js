@@ -7,7 +7,7 @@ export function* fetchUser(action) {
         const user = yield call(axios.get, `http://localhost:5000/users/${action.payload.id}`);
         yield put({ type: FETCH_USER_SUCCESS, payload: { userData: user.data } })
     } catch (error) {
-        console.log('fetchUsers error:', error.message)
+		yield put({ type: 'USERS_FAIL', payload: { error } })
     }
 }
 

@@ -41,9 +41,17 @@ class UserList extends Component {
 	}
 
 	render() {
+		if (this.props.usersError) {
+			return (
+				<div>
+					<button className='btn-nav' onClick = {this.toChat}> Chat </button>
+					<div className='chat-error'> {this.props.usersError.message} </div>
+				</div>
+		)};
+
 		if (!this.props.response || !this.props.users) return <Spinner/>;
 		if (this.props.response.user) this.props.history.push('/chat');
-	
+		
 		return (
 			<div>
 				<button className='btn-nav' onClick = {this.toChat}> Chat </button>
@@ -86,7 +94,8 @@ UserList.propTypes = {
 
 const mapStateToProps = (state) => {
 	return {
-		users: state.users,
+		users: state.users.users,
+		usersError: state.users.usersError,
 		...state.loading
 	}
 };

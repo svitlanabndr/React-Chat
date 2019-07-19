@@ -5,7 +5,8 @@ import {
 	ADD_MESSAGE,
 	DELETE_MESSAGE,
 	LIKE_MESSAGE,
-	CLEAR_INPUT
+	CLEAR_INPUT,
+	CHAT_FAIL
 } from "./actionTypes";
 
 export function* fetchMessages() {
@@ -28,7 +29,7 @@ export function* addMessage(action) {
 		yield put({ type: FETCH_MESSAGES });
 		yield put({ type: CLEAR_INPUT });
 	} catch (error) {
-		console.log('createMessage error:', error.message);
+        yield put({ type: CHAT_FAIL, payload: { error } })
 	}
 }
 
@@ -41,7 +42,7 @@ export function* deleteMessage(action) {
 		yield call(axios.delete, `http://localhost:5000/chat/${action.payload.id}`);
 		yield put({ type: FETCH_MESSAGES });
 	} catch (error) {
-		console.log('deleteMessage Error:', error.message);
+        yield put({ type: CHAT_FAIL, payload: { error } })
 	}
 }
 
@@ -54,7 +55,7 @@ export function* likeMessage(action) {
 		yield call(axios.post, `http://localhost:5000/chat/like/${action.payload.id}`);
 		yield put({ type: FETCH_MESSAGES });
 	} catch (error) {
-		console.log('likeMessage Error:', error.message);
+        yield put({ type: CHAT_FAIL, payload: { error } })
 	}
 }
 

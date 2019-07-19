@@ -45,6 +45,16 @@
   float: right;
 }
 
+.chat {
+  margin-bottom: 50px;
+}
+
+.chat-error {
+  color: rgb(231, 82, 82);
+  text-align: center;
+  font-style: italic;
+}
+
 .btn-nav:hover {
   background-color: steelblue;
   color: white;

@@ -11,11 +11,14 @@ class LoginForm extends React.Component {
             if (this.props.response.admin) this.props.history.push('/users');
             if (this.props.response.user) this.props.history.push('/chat');
         }
+        let error;
+        if (this.props.error) error = <div className='error-login'>Error: { this.props.error.message }. Try again. </div>
         
         return (
             <div className='login-form'>
                 <Login/>
                 <Password/>
+                { error }
                 <Submit/>
             </div>
         );
@@ -23,7 +26,10 @@ class LoginForm extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { ...state.loading };
+    return { 
+        ...state.loading,
+        error: state.login.error        
+    };
 }
 
 export default connect(mapStateToProps)(LoginForm);
