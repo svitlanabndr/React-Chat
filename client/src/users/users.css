@@ -1,0 +1,58 @@
+.user-list {
+    padding: 30px 15px 0 25px;
+    width: 60%;
+    height: 450px;
+    overflow-y: auto;
+    margin: 40px auto 0 auto;
+    border: 1px solid gray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.list-group-item {
+    margin: 10px 0;
+}
+
+.user-info {
+    display: inline-block;
+    width: 80%;
+}
+.btn-group {
+    display: inline-block;
+    width: 20%;
+}
+
+.btn-group .btn,
+.btn-success {
+    height: 40px;
+    border: 0;
+    font-size: 1.5em;
+    border-radius: 2px;
+}
+.btn-dark {
+    color:  rgb(124, 29, 29);
+    background: transparent;
+}
+
+.btn-dark:hover {
+    background-color: rgb(124, 29, 29);
+    color: white;
+}
+.btn-primary,
+.btn-success {
+    color: #05728f;
+    background: transparent;
+}
+.btn-primary:hover,
+.btn-success:hover {
+    color: white;
+    background: #05728f;
+}
+
+.badge-info {
+    background-color: #05718f5b;
+    border-radius: 2px;
+    margin-right: 20px;
+    font-size: 1em;
+    padding: 3px;
+    color: #05728f;
+}

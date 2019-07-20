@@ -1,0 +1,15 @@
+.message-list {
+    padding: 30px 15px 0 25px;
+    width: 60%;
+    height: 450px;
+    overflow-y: auto;
+    margin: 0 auto 0 auto;
+    border: 1px solid gray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.break-line {
+    text-align: center;
+    color: gray;
+    font-size: 14px;
+}
